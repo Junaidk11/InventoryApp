@@ -1,15 +1,12 @@
 <?php include('includes/header.php'); ?>
 
-
 <?php
+/*Include functions
 
-//Include functions
+check to see if user if logged in else redirect to index page
 
-//check to see if user if logged in else redirect to index page
-
-// Don't need to - the file already included in the header file. 
+Don't need to - the file already included in the header file. */
 ?>
-
 
 
 <?php 
@@ -28,7 +25,7 @@ $db = new Pdocon;
 
 //write a statement to check if the customer id is coming in from the ajax request and write a function to send back the below report menu to ajax, you must bind using the customer id
 
-$db->query('SELECT * FROM users WHERE id=:id');
+$db->query('SELECT * FROM inventory WHERE id=:id');
 
 $db->bindvalue(':id',$id, PDO::PARAM_INT);
 
@@ -39,13 +36,9 @@ $row = $db->fetchSingle();
     //Looping through our fetched array in row vairable.   This can go anywhere in the HTML tags
     if($row){
         
-        $spending_amount = $row['spending_amt'];
-        
-        $total_orders = 100;
-        
-        $total_amt_spent = $spending_amount * $total_orders;
-        
-        $average_amt_spent = ($total_amt_spent) / ($total_orders);
+        /* Perform some calculations here and Make The report better.  */
+        $available = $row['quantity'];
+        $threshold = $row['thresholdQuantity'];
         
         // We put the div inside 'echo' because we're inside PHP;
         // Removing 'echo' will result in an error. 
@@ -58,8 +51,8 @@ $row = $db->fetchSingle();
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">100</div>
-                                        <div>Total Orders</div>
+                                        <div class="huge">'. $available .'</div>
+                                        <div>Total In-stock</div>
                                     </div>
                                 </div>
                             </div>
@@ -82,8 +75,8 @@ $row = $db->fetchSingle();
                                         <i class="fa fa-support fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">' . $total_amt_spent . '</div>
-                                        <div>Total Amount Spent</div>
+                                        <div class="huge">' . $available . '</div>
+                                        <div>Total In-stock2</div>
                                     </div>
                                 </div>
                             </div>
@@ -105,8 +98,8 @@ $row = $db->fetchSingle();
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div id="salary" class="col-xs-9 text-right">
-                                        <div class="huge">' . $average_amt_spent . '</div>
-                                                Average Amount Spent
+                                        <div class="huge">' . $threshold . '</div>
+                                        <div> Minimum Required </div>
                                     </div>
                                 </div>
                             </div>

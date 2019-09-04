@@ -1,15 +1,11 @@
 <?php include('includes/header.php'); ?>
 
 
-<?php
+<?php /*Include functions
 
-//Include functions
+check to see if user if logged in else redirect to index page
 
-//check to see if user if logged in else redirect to index page
-
-// Don't need to - the file already included in the header file. 
-
-?>
+ Don't need to - the file already included in the header file. */ ?>
 
 
 
@@ -19,7 +15,7 @@
 $id = $_GET['cus_id'];
 
 
-/****************Get  customer info to ajax *******************/
+/****************Get customer info to ajax *******************/
 
 //require database class files
 require('includes/pdocon.php');
@@ -28,8 +24,9 @@ require('includes/pdocon.php');
 $db = new Pdocon; 
 
 
-//Create a query to display customer inf // You must bind the id coming in from the ajax data
-$db->query('SELECT * FROM users WHERE id=:id'); 
+//Create a query to display customer inf0
+// You must bind the id coming in from the ajax data
+$db->query('SELECT * FROM inventory WHERE id=:id'); 
 
     
 //Get the id and keep it in a variable from the ajax - already implemented above 
@@ -49,22 +46,24 @@ $row = $db->fetchSingle();
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr >
-                                <th class="text-center">Customer Name</th>
-                                <th class="text-center">Amount</th>
+                                <th class="text-center">Supplier</th>
                                 <th class="text-center">Email</th>
+                                <th class="text-center">Cost</th>
                             </tr>
                         </thead>
                         <tbody>
                            <tr class="text-center">
-                            <td>' . $row['full_name'] . '</td>
-                            <td>$ ' . $row['spending_amt'] . '</td>
-                            <td>' . $row['email'] . '</td>
+                            <td>' . $row['productSupplier'] . '</td>
+                            <td>' . $row['productEmail'] . '</td>
+                            <td>' . $row['productCost'] . ' CAD</td>
+                            
                           </tr>
 
                         </tbody>
                     </table>
                 </div>';
     }
+    
 
 
 

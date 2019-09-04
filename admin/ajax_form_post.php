@@ -36,21 +36,21 @@ $db = new Pdocon;
 
 // First check if the form was submitting 
 
-if(isset($_POST['cus_id']))
+if(isset($_POST['product_id']))
 {
     
-    $cus_id = $_POST['cus_id']; // Retrieve the submitting customer_id, this will allow you to update the respective user's info in the database. 
-    $raw_amount  = cleandata($_POST['salary']);
-    $clean_amount = validateint($raw_amount);
-    $db->query("UPDATE users SET spending_amt=:amount WHERE id=:id");
-    $db->bindvalue(':id',$cus_id, PDO::PARAM_INT);
-    $db->bindvalue(':amount',$clean_amount,PDO::PARAM_INT); 
+    $product_id = $_POST['product_id']; // Retrieve the submitting customer_id, this will allow you to update the respective product's info in the database. 
+    $raw_threshold  = cleandata($_POST['threshold']);
+    $clean_threshold = validateint($raw_threshold);
+    $db->query("UPDATE inventory SET thresholdQuantity=:threshold WHERE id=:id");
+    $db->bindvalue(':id',$product_id, PDO::PARAM_INT);
+    $db->bindvalue(':threshold',$clean_threshold,PDO::PARAM_INT); 
     $row = $db->execute();
     
             if($row)
             {
 
-                 echo "<p class='bg-success text-center' style='font-weight:bold;'>User Updated </p>";
+                 echo "<p class='bg-success text-center' style='font-weight:bold;'>Minimum Required Updated </p>";
     
             }
 }

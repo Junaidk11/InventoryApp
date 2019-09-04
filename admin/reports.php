@@ -1,29 +1,14 @@
 <?php include('includes/header.php'); ?>
+<?php /*Include functions
 
+check to see if user if logged in else redirect to index page
 
-<?php
+Don't need to include functions.php because the functions.php is included in the header.php so you don't call it twice. */ ?>
+<?php  /* This page is used to provide a report about the selected customer from the users.php file. Therefore, we need the 'id' of the customer selected to have access to the users information from the database - if needed. 
 
-//Include functions
+ The customer id can be collected using the GET super global which allows extracting information from the url of this page. 
 
-//check to see if user if logged in else redirect to index page
-
-//Don't need to include functions.php because the functions.php is included in the header.php so you don't call it twice. 
-
-?>
-<?php
-
-
-// This page is used to provide a report about the selected customer from the users.php file. Therefore, we need the 'id' of the customer selected to have access to the users information from the database - if needed. 
-
-// The customer id can be collected using the GET super global which allows extracting information from the url of this page. 
-
-
-//Get ID and pass it on to ajax
-    $product_id = $_GET['report_id'];
-
-?>
-    
-    
+Get ID and pass it on to ajax*/   $product_id = $_GET['report_id']; ?>    
 <script>
 
 $(document).ready(function(){
@@ -56,8 +41,10 @@ $(document).ready(function(){
     */
     
     setInterval(function(){ display_report_menu()}, 2000);  // the display_report_menu() function is called every 1 second automatically. 
-    setInterval(function(){ display_customer_info()}, 4000); // the display_customer_info() function is called every 1 second automatically. 
+    setInterval(function(){ display_supplier_info()}, 4000); // the display_customer_info() function is called every 4 second automatically. 
+    setInterval(function(){ display_threshold_info()},4000);  // the display_threshold_infor() function is called every 4 second automatically. 
    
+    /*
     function display_report_menu()
     {
 
@@ -76,36 +63,36 @@ $(document).ready(function(){
         });
     
     }
+    */
     
-    
-    function display_customer_info(){
+    function display_report_menu(){
         
-        $.get("ajax_show_customer.php?cus_id=<?php echo $product_id; ?>", function(show_customer){$("#customerinfo").html(show_customer)})
+        $.get("ajax_report_menu.php?cus_id=<?php echo $product_id; ?>", function(show_report){$("#report_menu").html(show_report)})
+    }   
+    function display_supplier_info(){
+        
+        $.get("ajax_show_supplier.php?cus_id=<?php echo $product_id; ?>", function(show_customer){$("#customerinfo").html(show_customer)})
     }
  
 });
     
 </script>
     
-    
-
-
     <div id="page-wrapper">
 
             <div class="container-fluid">
 
-                 <?php 
+                 <?php
                                     $fullname = $_SESSION['user_data']['fullname']; 
-                                    echo '<small class="pull-left" style="color:#337ab7;">'.$fullname.' | Product Report</small>';  
+                                    echo '<small class="pull-left" style="color:#337ab7;">'.$fullname.' | Viewing Report </small>';  
                  ?>
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="page-header">
-                        </h3>
+                        <h3 class="page-header"> Product Report </h3>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-envelope"></i><a href="msg-customer.php?cus_id=<?php echo $product_id; ?>">Place a new order</a>  
+                                <i class="fa fa-envelope"></i><a href="msg-customer.php?cus_id=<?php echo $product_id; ?>"> New Order </a>  
                             </li>
                             <small class="pull-right"><a href="inventory.php"> View Inventory </a> </small>
                         </ol>
@@ -117,8 +104,8 @@ $(document).ready(function(){
 
                 <!-- /.row -->
                 <div class="row" id="report_menu">
-                 
-              
+                  <!-- Report Menu information from Ajax Here -->
+                      
                 </div> 
 
                 <div class="row">
@@ -126,10 +113,11 @@ $(document).ready(function(){
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title text-center"><i class="fa fa-money fa-fw"></i> Product Information</h3>
+                                <h3 class="panel-title text-center"><i class="fa fa-money fa-fw"></i> Supplier Information </h3>
                             </div>
                             <div id="customerinfo" class="panel-body" style="background-color:lightgrey;">
-                                 <!-- Customer information from Ajax Here -->
+                                
+                                 <!-- Supplier information from Ajax Here -->
                               
                                 <div class="text-right">
                                     <a href="#"><i class="fa fa-arrow-circle-right"></i></a>
@@ -141,38 +129,11 @@ $(document).ready(function(){
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title text-center"><i class="fa fa-money fa-fw"></i> Order History</h3>
+                                <h3 class="panel-title text-center"><i class="fa fa-money fa-fw"> </i> </h3>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>Order#</th>
-                                                <th>Order Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>3326</td>
-                                                <td>10/21/2013</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3325</td>
-                                                <td>10/21/2013</td>
-                                        
-                                            </tr>
-                                            <tr>
-                                                <td>3324</td>
-                                                <td>10/21/2013</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3323</td>
-                                                <td>10/21/2013</td>
-                                            </tr>
-                                      
-                                        </tbody>
-                                    </table>
+                                    
                                 </div>
                                 <div class="text-right">
                                     <a href="#"><i class="fa fa-arrow-circle-right"></i></a>
@@ -187,25 +148,24 @@ $(document).ready(function(){
                                 <h3 class="panel-title text-center"><i class="fa fa-money fa-fw"></i> Minimum Required</h3>
                             </div>
                             <div id="alert_success" class="panel-body">
-   
                                           <br>
-                                          
-                                            <form method="post" class="form-horizontal" role="form" action="ajax_form_post.php" id="updatedata">
-                                                  <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="salary" style="color:#777;">Quantity</label>
+                                           
+                                            <form method="post" class="form-horizontal" role="form" action="ajax_form_post.php" id="updatedata">   
+                                                  <div class="form-group" >
+                                                        <label class="control-label col-sm-2" for="salary" style="color:#777;">Threshold</label>
                                                         <div class="col-sm-10">
-                                                          <input type="text" name="salary" class="form-control" id="salary" placeholder="Update threshold" required>
+                                                            <input type="text" name="threshold" class="form-control" placeholder="Update Threshold" required>
                                                         </div>
                                                   </div>
                                                   <div class="form-group">
                                                         <div class="col-sm-10">
-                                                          <input type="hidden" name="cus_id" class="form-control" id="cus_id" value="<?php echo $product_id; ?>" required>
+                                                          <input type="hidden" name="product_id" class="form-control" id="product_id" value="<?php echo $product_id;?>" required>
                                                         </div>
                                                   </div>
 
                                                   <div class="form-group"> 
                                                     <div class="col-sm-offset-2 col-sm-10">
-                                                      <input type="submit" class="btn btn-primary" name="update_customer" value="submit"  id="">
+                                                      <input type="submit" class="btn btn-primary" name="update_threshold" value="submit"  id="">
                                                     </div>
                                                   </div>
                                             </form>
