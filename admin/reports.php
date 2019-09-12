@@ -4,11 +4,16 @@
 check to see if user if logged in else redirect to index page
 
 Don't need to include functions.php because the functions.php is included in the header.php so you don't call it twice. */ ?>
-<?php  /* This page is used to provide a report about the selected customer from the users.php file. Therefore, we need the 'id' of the customer selected to have access to the users information from the database - if needed. 
+<?php  
+/* This page is used to provide a report about the selected customer from the users.php file. Therefore, we need the 'id' of the customer selected to have access to the users information from the database - if needed. 
 
  The customer id can be collected using the GET super global which allows extracting information from the url of this page. 
 
-Get ID and pass it on to ajax*/   $product_id = $_GET['report_id']; ?>    
+Get ID and pass it on to ajax*/   
+
+$product_id = $_GET['report_id']; 
+
+?>    
 <script>
 
 $(document).ready(function(){
@@ -28,42 +33,25 @@ $(document).ready(function(){
     /*
      
      The function below will only be called once on this page. Therefore, to notice updated information on the page, you would need to press the refresh button everytime. To avoid this, you can call the functions below periodically by utilizing Java's setinterval method as shown by the uncommmented section below
+     */
     
     //Call function to display result menu at a certain interval
     display_report_menu();
     
     //Call function to display customer information 
-    display_customer_info()
+    display_supplier_info();
+    
+    display_email_supplier();
     
     // The function below utilizes the .ajax() method to display a report to the user. 
     // Read the ajax tutorial that I did. 
    
-    */
     
-    setInterval(function(){ display_report_menu()}, 2000);  // the display_report_menu() function is called every 1 second automatically. 
-    setInterval(function(){ display_supplier_info()}, 4000); // the display_customer_info() function is called every 4 second automatically. 
-    setInterval(function(){ display_threshold_info()},4000);  // the display_threshold_infor() function is called every 4 second automatically. 
-   
-    /*
-    function display_report_menu()
-    {
+    setInterval(function(){ display_report_menu()}, 2000);  // the display_report_menu() function is called every 2 second automatically. 
+    setInterval(function(){ display_supplier_info()}, 4000); // the display_customer_info() function is called every 4 second automatically.
+    setInterval(function(){ display_email_supplier()}, 4000); 
+    
 
-        $.ajax({
-            
-            url: 'ajax_report_menu.php?cus_id=<?php echo $product_id; ?>', 
-            type: 'POST',
-            success: function(show_report){
-                
-                if(show_report){
-                    $("#report_menu").html(show_report);
-                }
-                
-            }
-          
-        });
-    
-    }
-    */
     
     function display_report_menu(){
         
@@ -72,6 +60,11 @@ $(document).ready(function(){
     function display_supplier_info(){
         
         $.get("ajax_show_supplier.php?cus_id=<?php echo $product_id; ?>", function(show_customer){$("#customerinfo").html(show_customer)})
+    }
+    function display_email_supplier(){
+        $.get("ajax_email_supplier.php",function(show_email)
+         {$("#emailnotification").html(show_email)})
+        
     }
  
 });
@@ -92,11 +85,14 @@ $(document).ready(function(){
                         <h3 class="page-header"> Product Report </h3>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-envelope"></i><a href="msg-customer.php?cus_id=<?php echo $product_id; ?>"> New Order </a>  
+                                <i class="fa fa-envelope"></i><a href="msg-supplier.php?cus_id=<?php echo $product_id; ?>"> New Order </a>  
                             </li>
                             <small class="pull-right"><a href="inventory.php"> View Inventory </a> </small>
                         </ol>
                     </div>
+                </div>
+                <div class="row" id="emailnotification">
+                    <!-- Email success information from Ajax Here -->
                 </div>
                 <!-- /.row -->
 

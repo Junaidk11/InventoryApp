@@ -22,6 +22,7 @@
 ?>
 
 
+
 <?php 
 /************** Fetching data from database using id ******************/
 
@@ -44,6 +45,25 @@ $row = $db->fetchSingle(); // this function will execute the prepared query abov
 // Next, we will use the fetched data and display it on the admin's account page using HTML code below. 
 
 ?>
+
+<!-- Email notification script here -->
+<script>
+    
+    $(document).ready(function(){
+        
+        display_email_supplier();
+        
+        setInterval(function(){ display_email_supplier()}, 4000); 
+        function display_email_supplier(){ 
+            $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)})
+        
+    }        
+    });
+    
+    
+</script>
+
+
 <!-- 
       The HTML code below is for displaying the contents on the admin page, after he/she has successfully logged in. 
 -->
@@ -67,6 +87,11 @@ $row = $db->fetchSingle(); // this function will execute the prepared query abov
    </div>
    
 <div class="container"> 
+  
+  <div class = "row" id="emailnotification">
+           <!-- Place Your email notification here -->
+   </div>
+   
    <div class="rows">
      
       <?php     /* call your display function to display session message on top page*/ 
@@ -237,5 +262,6 @@ if(isset($_POST['delete_admin']))//name of the submit button
 }
 
 ?>
+
 
 <?php include('includes/footer.php'); ?>

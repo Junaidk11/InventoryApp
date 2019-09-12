@@ -4,12 +4,23 @@
 <?php
 
 //Include functions
+//Don't need to include functions.php because the functions.php is included in the header.php so you don't call it twice. 
+
 
 //check to see if user if logged in else redirect to index page
 
-//Don't need to include functions.php because the functions.php is included in the header.php so you don't call it twice. 
+
+// Check to see if the user is logged in, if the session 'user_is_logged_in' is not set, the user accessing this page should be redirected to the index.php, where the user can either register or login.
+
+    if(!($_SESSION['user_is_logged_in'])) // if user_is_logged_in is not set
+    {
+        redirect('logout.php'); // Redirect to the index.php page, first you need to get out of this page, because index.php is not in the admin folder. 
+    }else{
+        
 
   $cus_id = $_GET['cus_id']; // Grab the customer id from the URL 
+
+  $fullname = $_SESSION['user_data']['fullname'];
 
 ?>
 
@@ -23,18 +34,15 @@
   <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="page-header">
-                           <?php //Collect the admin's name and put it in there using the session super global?> Admin Name | You are Admin
-                        </h3>
                         <ol class="breadcrumb">
                             <li class="active">
                                 <i class="fa fa-envelope"></i> <a href="reports.php?report_id=<?php echo $cus_id; ?>">View Report</a>  
                             </li>
-                            <small class="pull-right"><a href="customers.php"> View Customers </a> </small>
+                            <small class="pull-right"><a href="inventory.php"> View Inventory</a> </small>
                         </ol>
                     </div>
                 </div>
-                <!-- /.row -->
+                 <!-- /.row -->
 
   <div class="row">
         
@@ -43,7 +51,7 @@
                     <section id="contact" class="grey_section" style="padding:20px; border: 1px solid #ddd;">   
                          <div class="row">
                             <div class="widget widget_contact col-sm-3 to_animate" >
-                               <p><strong>Customer Information</strong></p><br>
+                               <p><strong>Supplier Information</strong></p><br>
                                
                                 <?php
                              
@@ -56,7 +64,7 @@
                                 $db= new Pdocon;
                             
                                      //Write your query
-                                $db->query('SELECT * FROM users WHERE id=:id');
+                                $db->query('SELECT * FROM inventory WHERE id=:id');
                             
 
                                      //binding value with your id
@@ -71,21 +79,22 @@
                                       ?>
  
                                 <p style="background-color: #fff; padding: 3px">
-                                    <strong>Name: </strong> <?php echo $row['full_name'];//echo fullname  ?>
+                                    <strong>Name: </strong> <?php echo $row['productSupplier'];//echo fullname  ?>
                                 </p><hr>
                              
                                 <p style="background-color: #fff; padding: 3px">
-                                    <strong>Spending Amount: </strong>$ <?php echo $row['spending_amt'];//echo amount ?>
+                                    <strong>Email: </strong> <?php echo $row['productEmail'];//echo email ?>
                                 </p><hr>
+                                
                                 <p style="background-color: #fff; padding: 3px">
-                                    <strong>Email: </strong> <?php echo $row['email'];//echo email ?>
+                                    <strong>Cost: </strong>$ <?php echo $row['productCost'];//echo amount ?>
                                 </p><hr>
+                               
                               
                             </div>
                             
                             <div class="col-sm-3">
                                <p><strong></strong></p><br><br>
-                               
                                
                                 <p>
                                     <strong></strong>
@@ -111,7 +120,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email <span class="required">*</span></label>
-                                        <input type="email" aria-required="true" size="30" value="<?php echo $row['email'] ?>" name="email" id="email" class="form-control" placeholder="<?php echo $row['email'] ?>" disabled>
+                                        <input type="email" aria-required="true" size="30" value="<?php echo $row['productEmail'] ?>" name="email" id="email" class="form-control" placeholder="<?php echo $row['productEmail'] ?>" disabled>
                                     </div>
                                    
                                     <div class="form-group">
@@ -121,7 +130,7 @@
                                     
                                     <div class="form-group">
                                         <!-- <input type="submit" value="Send" id="contact_form_submit" name="contact_submit" class="theme_button"> -->
-                                        <button type="submit" id="contact_form_submit" name="customer_submit" class="btn btn-default">Submit</button>
+                                        <button type="submit" id="contact_form_submit" name="email_submit" class="btn btn-default">Send</button>
                                     </div>
                                 </form>
                             </div>
@@ -139,7 +148,7 @@
 <?php 
                //Write a function to check if form is submited
           
-                    if(isset($_POST['customer_submit'])){
+                    if(isset($_POST['email_submit'])){
 
 
                         //Get id
@@ -153,7 +162,7 @@
                         $db = new Pdocon; 
                         
                         //make the query 
-                        $db->query('SELECT * FROM users WHERE id=:id');
+                        $db->query('SELECT * FROM inventory WHERE id=:id');
                     
 
                         // bind 
@@ -167,7 +176,7 @@
                         if($row)
                         // Collect customer fullname from the database and keep in and $cus_name variable
                         {
-                            $cus_name = $row['full_name']; 
+                            $cus_name = $row['productSupplier']; 
                           
   
                         //Collect and validate form field data and keep in $subject and $message variable  
@@ -183,24 +192,23 @@
                         // Create the email and send the message
                         $to                 =   $row['email'];        
                         $email_subject = "Subject:  $clean_subject";
-                        $email_body = "\nDear $cus_name, \n\nThis is a message from Cus MangerApp.Com.\n\n"."Here are the details:" ."\n\n $clean_message \n\n";
-                        $headers = "From: noreply@customerapp.com"; 
+                        $email_body = "\nDear $cus_name, \n\nThis is a message from Fraser International College.\n\n"."Here are the details:" ."\n\n $clean_message \n\n";
+                        $headers = "From: noreply@inventoryapp.com"; 
          
                         if(mail($to,$email_subject,$email_body,$headers)){
                             
                        
                            echo "<div class='alert alert-success text-center'>
                                   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                  <strong>Success!</strong> Your Message has been successfully sent.<a href='customers.php'> Back to Customers</a>
+                                  <strong>Success!</strong> Your Message has been successfully sent.<a href='inventory.php'> Back to Inventory</a>
                                  </div>";
                             }else{
                            
                             
                             echo "<div class='alert alert-danger text-center'>
                                   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                  <strong>Sorry!</strong> Your Message could not be Processed, Please Try Again <a href='customers.php'> Back to Customers</a>
+                                  <strong>Sorry!</strong> Your Message could not be Processed, Please Try Again <a href='inventory.php'> Back to Inventory</a>
                                  </div>";
-                            
                         }
                         
                          return true;
@@ -219,6 +227,8 @@
     
 </div> <!--Container Fluid -->
 </div><!--Page Wrapper -->
+
+<?php } ?> 
 
 <br><br><br><br>
 

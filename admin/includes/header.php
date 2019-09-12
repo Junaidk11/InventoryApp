@@ -13,8 +13,7 @@ session_start();
     if(!($_SESSION['user_is_logged_in'])) // if user_is_logged_in is not set
     {
         redirect('logout.php'); // Redirect to the index.php page, first you need to get out of this page, because index.php is not in the admin folder. 
-    }else
-    {
+    }else{
 ?>
      
     
@@ -67,7 +66,7 @@ session_start();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand navbar-light" href="admin/customers.php" style="color: #f3f3f3">Inventory<strong>MANAGER</strong></a>
+                <a class="navbar-brand navbar-light" href="" style="color: #f3f3f3">Inventory<strong>MANAGER</strong></a>
             </div>
 
             <div class="collapse navbar-collapse" id="navbar-collapse">

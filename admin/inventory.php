@@ -8,6 +8,9 @@
 */
 ?>
 
+
+
+
 <?php 
 /************** Fetching all data from database ******************/
 
@@ -26,13 +29,35 @@ $db->query("SELECT * FROM inventory"); // prepare a query to sellect all the sue
 $results = $db->fetchMultiple();  // All the information in the users table from the database are fetched and stored in $results variable
 ?>
 
+  
+  
+  <script>
+    
+    $(document).ready(function(){
+        
+        display_email_supplier();
+        
+        setInterval(function(){ display_email_supplier()}, 4000); 
+        function display_email_supplier(){ 
+            $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)})
+        
+    }        
+    });
+    
+    
+</script>
+
 
   <div class="container">
 
    <?php // call your display function to display session message on top page 
       showmsg();
       
-      ?>
+   ?>
+   
+   <div class = "row" id="emailnotification">
+           <!-- Place Your email notification here -->
+   </div>
    
   <div class="jumbotron">
   
