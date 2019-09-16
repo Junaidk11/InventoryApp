@@ -113,7 +113,7 @@
 
                             <div class="col-sm-6">
                              
-                                <form class="form-horizontal" role="form" method="post" action="msg-customer.php?cus_id=<?php echo $row['id'] ?>">
+                                <form class="form-horizontal" role="form" method="post" action="msg-supplier.php">
                                     <div class="form-group">
                                         <label for="name">Subject <span class="required">*</span></label>
                                         <input type="text" aria-required="true" size="30" value="" name="subject" id="name" class="form-control" placeholder="Subject">
@@ -150,27 +150,25 @@
           
                     if(isset($_POST['email_submit'])){
 
-
+                        
                         //Get id
-                         $cus_id = $_POST['cus_id']; // Get the customer id from the "email" form 
+                         //$cus_id = $_POST['cus_id']; // Get the customer id from the "email" form 
 
                         // make connection to the database to fetch the respective cus_id's information - this is the customer you wish to send an email to. 
                         
                         
-                        require('includes/pdocon.php');
-                        
-                        $db = new Pdocon; 
+                        //require('includes/pdocon.php');
                         
                         //make the query 
                         $db->query('SELECT * FROM inventory WHERE id=:id');
-                    
+                        
 
                         // bind 
                         $db->bindvalue(':id', $cus_id, PDO::PARAM_INT); 
                        
 
                         //Fetch the user and keep it in a row variable
-                       $row = $db->fetchSingle();
+                        $row = $db->fetchSingle();
                         
                         
                         if($row)
@@ -190,7 +188,7 @@
                         
 
                         // Create the email and send the message
-                        $to                 =   $row['email'];        
+                        $to                 =   $row['productEmail'];        
                         $email_subject = "Subject:  $clean_subject";
                         $email_body = "\nDear $cus_name, \n\nThis is a message from Fraser International College.\n\n"."Here are the details:" ."\n\n $clean_message \n\n";
                         $headers = "From: noreply@inventoryapp.com"; 
@@ -228,7 +226,7 @@
 </div> <!--Container Fluid -->
 </div><!--Page Wrapper -->
 
-<?php } ?> 
+<?php } ?>
 
 <br><br><br><br>
 

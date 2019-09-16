@@ -30,7 +30,7 @@ $results = $db->fetchMultiple();  // All the information in the users table from
 ?>
 
   
-  
+ <!--
   <script>
     
     $(document).ready(function(){
@@ -45,7 +45,9 @@ $results = $db->fetchMultiple();  // All the information in the users table from
     });
     
     
+    
 </script>
+-->
 
 
   <div class="container">

@@ -1,9 +1,7 @@
 <?php 
-//Open ob_start and session_start functions
-    
+//Open ob_start and session_start functions 
     ob_start();
     session_start(); 
-
 ?>
     
 
@@ -80,11 +78,12 @@
                     */
                     header("Location: admin/my_admin.php"); 
                     
-                }else ?> <!-- close your php to execute HTML code-->
+                }else {
+                ?> <!-- close your php to execute HTML code-->
                 
-            <?php // else if the user is not loggin in then show this
-                { ?>  <!-- Open your else block code in php, close PHP to execute HTML code -->
-                
+             <!--else if the user is not loggin in then show this
+             Open your else block code in php, close PHP to execute HTML code -->
+              
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.php">Welcome Guest!</a></li>
                 </ul>

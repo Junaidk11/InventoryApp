@@ -17,7 +17,9 @@
 
     if(!($_SESSION['user_is_logged_in'])) // if user_is_logged_in is not set
     {
-        redirect('../index.php'); // Redirect to the index.php page, first you need to get out of this page, because index.php is not in the admin folder. 
+        
+        header("Location: ../index.php"); 
+        //redirect('../index.php'); // Redirect to the index.php page, first you need to get out of this page, because index.php is not in the admin folder. 
     }
 ?>
 
@@ -46,7 +48,8 @@ $row = $db->fetchSingle(); // this function will execute the prepared query abov
 
 ?>
 
-<!-- Email notification script here -->
+
+<!-- Email notification script here 
 <script>
     
     $(document).ready(function(){
@@ -62,6 +65,7 @@ $row = $db->fetchSingle(); // this function will execute the prepared query abov
     
     
 </script>
+-->
 
 
 <!-- 

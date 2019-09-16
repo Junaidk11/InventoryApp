@@ -3,13 +3,16 @@
 class Pdocon{
     
 
+    
     // The connection Properties
-
+    
+    
+        // For local Host 
         private $host       = "localhost";
         private $user       = "root";
         private $pass       = "";
         private $dbnm       = "Inventory_Application";
-   
+
 
     //Handle our connection
         private $dbh;

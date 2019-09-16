@@ -13,6 +13,7 @@ session_start();
     if(!($_SESSION['user_is_logged_in'])) // if user_is_logged_in is not set
     {
         redirect('logout.php'); // Redirect to the index.php page, first you need to get out of this page, because index.php is not in the admin folder. 
+        
     }else{
 ?>
      

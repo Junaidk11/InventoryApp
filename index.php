@@ -12,7 +12,6 @@ include('admin/includes/functions.php');
 
 //and also write a statement to redirect user when logged in 
 
-
 ?>
  
 <?php
@@ -22,7 +21,6 @@ require('admin/includes/pdocon.php');
     
 //instatiating our database objects
 $db = new Pdocon; 
-    
 //Collect and process Data on login submission
 /*
 
@@ -153,6 +151,7 @@ if (isset($_POST['submit_login']))// Check if submit button was pressed
     
     */
 ?>
+  
   
   <div class="row">
       <div class="col-md-4 col-md-offset-4">
