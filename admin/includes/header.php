@@ -2,24 +2,18 @@
 //Open ob_start and session_start functions
 ob_start();
 session_start();
-
 ?>
    
 <?php
-
 // Check to see if the user is logged in, if the session 'user_is_logged_in' is not set, the user accessing this page should be redirected to the index.php, where the user can either register or login. 
     include('includes/functions.php'); // Include your helper functions - to use the redirect function that you defined there. 
 
     if(!($_SESSION['user_is_logged_in'])) // if user_is_logged_in is not set
     {
         redirect('logout.php'); // Redirect to the index.php page, first you need to get out of this page, because index.php is not in the admin folder. 
-        
     }else{
 ?>
-     
-    
     <html>
-
     <head>
         
         <meta charset="utf-8">
@@ -111,15 +105,11 @@ session_start();
                                     <li class="divider"></li>
                                     <li><a href="logout.php"><i class="fa fa-sign-out"></i> Sign-out</a></li>
                                 </ul>
-                    </li>
-                  
-                </ul>
-                
+                    </li>   
+                </ul> 
        <?php } ?>
             </div>
-
         </div>
-
     </nav>
 <?php } ?> 
         

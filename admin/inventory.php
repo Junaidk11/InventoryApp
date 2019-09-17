@@ -1,5 +1,4 @@
 <?php include('includes/header.php'); ?>
-
 <?php
 /*Include functions - Don't have to, the header takes care of this and also ensures that a session is created for the current user.
 
@@ -7,10 +6,6 @@
 
 */
 ?>
-
-
-
-
 <?php 
 /************** Fetching all data from database ******************/
 
@@ -28,7 +23,6 @@ $db->query("SELECT * FROM inventory"); // prepare a query to sellect all the sue
 //Fetch all data and keep in a result set
 $results = $db->fetchMultiple();  // All the information in the users table from the database are fetched and stored in $results variable
 ?>
-
   
  <!--
   <script>
@@ -48,7 +42,6 @@ $results = $db->fetchMultiple();  // All the information in the users table from
     
 </script>
 -->
-
 
   <div class="container">
 
