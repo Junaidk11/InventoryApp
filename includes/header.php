@@ -2,11 +2,7 @@
 //Open ob_start and session_start functions 
     ob_start();
     session_start(); 
-?>
-    
-
-    <html>
-
+?><html>
     <head>
         
         <meta charset="utf-8">
