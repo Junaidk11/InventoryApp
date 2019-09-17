@@ -5,21 +5,19 @@
 //require database class files
 require('includes/pdocon.php');
 
-
 //instatiating our database object
 $db = new Pdocon;
 
-
 //Create query to check if new_order table has a new requestNewOrder set.
 
-$results = $db->query("SELECT * FROM new_order"); 
+$db->query("SELECT * FROM new_order");
 
+$results = $db->fetchMultiple();
 
-if($results['requestNewOrder']==1){
-    
-    // If there are entries in the new_order table, send email to each entry and delete the entry. 
-    
-    foreach ($results as $result){
+foreach ($results as $result){
+      // If there are entries in the new_order table, send email to each entry and delete the entry. 
+        if($result['requestNewOrder']){
+            
         // Request each Entry's supplier information from the Inventory database
         $db->query("SELECT * FROM inventory WHERE id=:id");
         $db->bindvalue(':id',$result['inventoryID'], PDO::PARAM_INT);
@@ -30,8 +28,8 @@ if($results['requestNewOrder']==1){
             // Create the email and send the message
             $to                 =   $row['productEmail'];        
             $email_subject = "Re: Placing new order for". $row['productName']."";
-            $email_body = "\nDear $cus_name, \n\nThis is a Test message for automated order.\n\n";
-            $headers = "From: noreply@inventoryapp.com"; 
+            $email_body = "\nDear $supplier_name, \n\nThis is a Test message for automated order.\n\n";
+            $headers = "From: noreply@junaidjkhan.com"; 
 
             if(mail($to,$email_subject,$email_body,$headers)){
                      echo "<div class='alert alert-success text-center'>
@@ -42,12 +40,14 @@ if($results['requestNewOrder']==1){
                                   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                                   <strong>Sorry!</strong> Your Order for".$row['productName']." could not be Processed. Check report!</div>";
                         }
+                        $result['requestNewOrder'] = 0; 
                          return true;
+            
+            
             }
 
     }
     
 }
-
 
 ?>

@@ -32,12 +32,14 @@ $(document).ready(function(){
     display_report_menu();
     //Call function to display customer information 
     display_supplier_info();
-    //display_email_supplier();
+    display_email_supplier();
     // The function below utilizes the .ajax() method to display a report to the user. 
     // Read the ajax tutorial that I did. 
-    setInterval(function(){ display_report_menu()}, 2000);  // the display_report_menu() function is called every 2 second automatically. 
-    setInterval(function(){ display_supplier_info()}, 4000); // the display_customer_info() function is called every 4 second automatically.
-    //setInterval(function(){ display_email_supplier()}, 4000); 
+    setInterval(function(){ display_report_menu()}, 1000);  // the display_report_menu() function is called every 1 second automatically. 
+    setInterval(function(){ display_supplier_info()}, 2000); // the display_customer_info() function is called every 2 second automatically.
+    setInterval(function(){ display_email_supplier()}, 3000); 
+    
+    
     function display_report_menu(){
         
         $.get("ajax_report_menu.php?cus_id=<?php echo $product_id; ?>", function(show_report){$("#report_menu").html(show_report)})
@@ -75,10 +77,12 @@ $(document).ready(function(){
                         </ol>
                     </div>
                 </div>
+              
+                <!-- /.row -->
+                 
                 <div class="row" id="emailnotification">
                     <!-- Email success information from Ajax Here -->
                 </div>
-                <!-- /.row -->
 
                  <!-- FIRST ROW WITH PANELS -->
 
