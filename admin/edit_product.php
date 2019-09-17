@@ -244,7 +244,7 @@ Don't need it, the header.php include takes care of it.
         $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
         $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
         $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
-        $db->bindvalue(':image', $collectedImage, PDO::PARAM_INT);  //Add this when you figure out the image editing option
+        $db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  //Add this when you figure out the image editing option
         $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
        
 
