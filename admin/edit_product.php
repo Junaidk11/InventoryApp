@@ -234,7 +234,7 @@ Don't need it, the header.php include takes care of it.
         
         //Write your query
 
-        $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity thresholdQuantity=:minreq WHERE id=:id");
+        $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity image=:image, thresholdQuantity=:minreq WHERE id=:id");
 
         //binding values with your variable
         $db->bindvalue(':id',$product_id, PDO::PARAM_INT);
@@ -244,8 +244,9 @@ Don't need it, the header.php include takes care of it.
         $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
         $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
         $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
-        $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
         $db->bindvalue(':image', $collectedImage, PDO::PARAM_INT);  //Add this when you figure out the image editing option
+        $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
+       
 
         //Execute query statement to send it into the database
         $run_query = $db->execute();
