@@ -233,7 +233,7 @@ Don't need it, the header.php include takes care of it.
         $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
         $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
         $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
-       // $db->bindvalue(':image', $collectedImage, PDO::PARAM_INT);  Add this when you figure out the image editing option
+        $db->bindvalue(':image', $collectedImage, PDO::PARAM_INT);  //Add this when you figure out the image editing option
 
         //Execute query statement to send it into the database
         $run_query = $db->execute();
