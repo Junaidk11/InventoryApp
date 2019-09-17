@@ -23,8 +23,6 @@ $db->query("SELECT * FROM inventory"); // prepare a query to sellect all the sue
 //Fetch all data and keep in a result set
 $results = $db->fetchMultiple();  // All the information in the users table from the database are fetched and stored in $results variable
 ?>
-  
-
   <script>
     
     $(document).ready(function(){
@@ -38,11 +36,7 @@ $results = $db->fetchMultiple();  // All the information in the users table from
     }        
     });
     
-    
-    
 </script>
-
-
   <div class="container">
 
    <?php // call your display function to display session message on top page 
