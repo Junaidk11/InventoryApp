@@ -24,14 +24,14 @@ $db->query("SELECT * FROM inventory"); // prepare a query to sellect all the sue
 $results = $db->fetchMultiple();  // All the information in the users table from the database are fetched and stored in $results variable
 ?>
   
- <!--
+
   <script>
     
     $(document).ready(function(){
         
         display_email_supplier();
         
-        setInterval(function(){ display_email_supplier()}, 4000); 
+        setInterval(function(){ display_email_supplier()}, 3000); 
         function display_email_supplier(){ 
             $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)})
         
@@ -41,7 +41,7 @@ $results = $db->fetchMultiple();  // All the information in the users table from
     
     
 </script>
--->
+
 
   <div class="container">
 
