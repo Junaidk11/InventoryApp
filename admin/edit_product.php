@@ -92,14 +92,34 @@ Don't need it, the header.php include takes care of it.
             </div>
           </div>
            
-              <div class="form-group">
+          <div class="form-group">
             <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Description</label>
             <div class="col-sm-10">
               <input type="text" name="description" class="form-control" id="description" value="<?php echo $result['productDescription']; ?>" required>
             </div>
           </div>
            
-        
+            <div class="form-group">
+            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Supplier</label>
+            <div class="col-sm-10">
+              <input type="text" name="suppliername" class="form-control" id="suppliername" value="<?php echo $result['productSupplier']; ?>" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Email</label>
+            <div class="col-sm-10">
+              <input type="text" name="supplieremail" class="form-control" id="supplieremail" value="<?php echo $result['productEmail']; ?>" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Cost</label>
+            <div class="col-sm-10">
+              <input type="number" name="productcost" class="form-control" id="productcost" value="<?php echo $result['productCost']; ?>" required>
+            </div>
+          </div>
+          
             <div class="form-group">
             <label class="control-label col-sm-2" for="quantity" style="color:#f3f3f3;">Quantity</label>
             <div class="col-sm-10">
@@ -107,14 +127,22 @@ Don't need it, the header.php include takes care of it.
             </div>
           </div>
           
-          <!--
+           
+           <div class="form-group">
+            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Minimum Required</label>
+            <div class="col-sm-10">
+              <input type="text" name="productminreq" class="form-control" id="productminreq" value="<?php echo $result['thresholdQuantity']; ?>" required>
+            </div>
+          </div>
+           
             <div class="form-group">
             <label class="control-label col-sm-2" for="image"></label>
             <div class="col-sm-10">
               <input type="file" name="image" id="image" placeholder="Choose Image" required>
             </div>
           </div>
-          -->
+         
+
         
           <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-10">
@@ -134,14 +162,12 @@ Don't need it, the header.php include takes care of it.
                    <?php // Get the image from table and keep in a variable 
                             $image = $result['image'];
                     ?>
-               
                 <?php //echo  image folder and concatinate it with a style  
                 echo '<img src="uploaded_image/'. $image .'"style="width:150px;height:150px">'; ?> 
               </a>
             </div>
            </div>
        </div>
-        
          
          <?php } //end  
     ?>

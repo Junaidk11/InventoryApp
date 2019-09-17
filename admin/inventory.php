@@ -95,7 +95,7 @@ $results = $db->fetchMultiple();  // All the information in the users table from
             <td><?php echo $result['productCost'] ?></td>
             <td><?php echo $result['quantity'] ?></td>
             <td><?php //echo  image folder and concatinate it with a style  
-                echo '<img src="uploaded_image/'. $result['image'] .'"style="width:150px;height:150px">'; ?> </td>
+                echo '<img src="uploaded_image/'. $result['image'] .'"style="width:60px;height:60px">'; ?> </td>
             <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View</a></td>
             <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Edit</a></td>
             
