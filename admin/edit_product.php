@@ -188,12 +188,20 @@ Don't need it, the header.php include takes care of it.
     
     $raw_name = cleandata($_POST['name']);
     $raw_description = cleandata($_POST['description']);
+    $raw_supplier = cleandata($_POST['suppliername']);
+    $raw_email = cleandata($_POST['supplieremail']);
+    $raw_cost  = cleandata($_POST['productcost']);
     $raw_quantity = cleandata($_POST['quantity']);
+    $raw_threshold = cleandata($_POST['productminreq']);
     
     // Validate and sanitize the cleaned data
     $clean_name = sanitizer($raw_name);
     $clean_description = sanitizer($raw_description);
+    $clean_supplier = sanitizer($raw_supplier);
+    $clean_email = validateemail($raw_email);
+    $clean_cost = validateint($raw_cost);
     $clean_quantity = validateint($raw_quantity);
+    $clean_threshold =  validateint($raw_threshold); 
     
      // Image adding steps:
     
@@ -226,13 +234,17 @@ Don't need it, the header.php include takes care of it.
         
         //Write your query
 
-        $db->query("UPDATE inventory SET productName=:name, productDescription=:description, quantity=:quantity WHERE id=:id");
+        $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity thresholdQuantity=:minreq WHERE id=:id");
 
         //binding values with your variable
         $db->bindvalue(':id',$product_id, PDO::PARAM_INT);
         $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
         $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
+        $db->bindvalue(':supplier',$clean_supplier, PDO::PARAM_STR);
+        $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
+        $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
         $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
+        $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
         $db->bindvalue(':image', $collectedImage, PDO::PARAM_INT);  //Add this when you figure out the image editing option
 
         //Execute query statement to send it into the database
