@@ -32,22 +32,26 @@ foreach ($results as $result){
             $headers = "From: noreply@junaidjkhan.com"; 
 
             if(mail($to,$email_subject,$email_body,$headers)){
-                     echo "<div class='alert alert-success text-center'>
-                      <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                      <strong>Success!</strong> Your order for ". $row['productName']."has been successfully placed. </div>";
-                            }else{
+                
+                     $db->query('DELETE FROM new_order WHERE inventoryID=:id');
+                     $db->bindvalue(':id',$row['id'], PDO::PARAM_INT);
+                     $success = $db->execute();
+                
+                         if($success){
+
+                                echo "<div class='alert alert-success text-center'>
+                                  <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                                  <strong>Success!</strong> Your order for ". $row['productName']."has been successfully placed. </div>";
+                        
+                        }
+            }else{
                                   echo "<div class='alert alert-danger text-center'>
                                   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                                   <strong>Sorry!</strong> Your Order for".$row['productName']." could not be Processed. Check report!</div>";
                         }
-                        $result['requestNewOrder'] = 0; 
+                       
                          return true;
-            
-            
-            }
 
     }
-    
-}
-
-?>
+  }
+}?>
