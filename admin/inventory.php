@@ -76,8 +76,11 @@ $results = $db->fetchMultiple();  // All the information in the users table from
             <th class="text-center">Item ID</th>
             <th class="text-center">Name</th>
             <th class="text-center">Description </th>
+            <th class="text-center">Supplier</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Cost</th>
             <th class="text-center">Quantity</th>
-             <th class="text-center">Details</th>
+            <th class="text-center">Image</th>
             <!-- <th class="text-center">Image</th> -->
           </tr>
         </thead>
@@ -87,10 +90,13 @@ $results = $db->fetchMultiple();  // All the information in the users table from
             <td><?php echo $result['id'] ?></td>
             <td><?php echo $result['productName'] ?></td>
             <td><?php echo $result['productDescription'] ?></td>
+            <td><?php echo $result['productSupplier'] ?></td>
+            <td><?php echo $result['productEmail'] ?></td>
+            <td><?php echo $result['productCost'] ?></td>
             <td><?php echo $result['quantity'] ?></td>
+            <td><?php //echo  image folder and concatinate it with a style  
+                echo '<img src="uploaded_image/'. $result['image'] .'"style="width:150px;height:150px">'; ?> </td>
             <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View</a></td>
-            <!--<td><?php echo $result['image'] ?></td> -->
-            <!-- <td><a href="product_description.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View Product Details</a></td> -->
             <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Edit</a></td>
             
           </tr>
