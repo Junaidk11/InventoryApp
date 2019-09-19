@@ -33,12 +33,21 @@ if(isset($_POST['submit_product'])) // The register button is pressed by the use
     
     $raw_name = cleandata($_POST['name']);
     $raw_description = cleandata($_POST['description']);
+    $raw_supplier = cleandata($_POST['suppliername']);
+    $raw_email = cleandata($_POST['supplieremail']);
+    $raw_cost  = cleandata($_POST['productcost']);
     $raw_quantity = cleandata($_POST['quantity']);
+    $raw_threshold = cleandata($_POST['productminreq']);
+    
     
     // Validate and sanitize the cleaned data
     $clean_name = sanitizer($raw_name);
     $clean_description = sanitizer($raw_description);
+    $clean_supplier = sanitizer($raw_supplier);
+    $clean_email = validateemail($raw_email);
+    $clean_cost = validateint($raw_cost);
     $clean_quantity = validateint($raw_quantity);
+    $clean_threshold =  validateint($raw_threshold); 
     
      // Image adding steps:
     
@@ -102,12 +111,16 @@ if(isset($_POST['submit_product'])) // The register button is pressed by the use
         
         // The user doesn't exist, so we prepare a query, copy the user to the database. 
         
-        $db->query("INSERT INTO inventory(id, productName, productDescription, quantity, image) VALUES(NULL,:name,:description,:quantity,:image)");
+        $db->query("INSERT INTO inventory(id, productName, productDescription, productSupplier, productEmail, productCost, quantity, thresholdQuantity, image) VALUES(NULL,:name,:description, :supplier, :email, :cost, :quantity, :minreq, :image)");
         
         // Bind the values 
         $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
         $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
+        $db->bindvalue(':supplier',$clean_supplier, PDO::PARAM_STR);
+        $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
+        $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
         $db->bindvalue(':quantity',$clean_quantity,PDO::PARAM_INT);
+        $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
         $db->bindvalue(':image',$collectedImage,PDO::PARAM_STR);
         
     
@@ -152,25 +165,54 @@ if(isset($_POST['submit_product'])) // The register button is pressed by the use
           
            <form class="form-horizontal" role="form" method="post" action="<?php $_SERVER["PHP_SELF"]?>" enctype="multipart/form-data" >
             <div class="form-group">
-            <label class="control-label col-sm-2" for="name"></label>
+            <label class="control-label col-sm-2" for="name" style="color:#f3f3f3;">Name</label>
             <div class="col-sm-10">
               <input type="name" name="name" class="form-control" id="name" placeholder="Enter Product Name" required>
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-2" for="description"></label>
+            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Description</label>
             <div class="col-sm-10">
               <input type="text" name="description" class="form-control" id="description" placeholder="Enter Description" required>
             </div>
           </div>
+          
+             <div class="form-group">
+            <label class="control-label col-sm-2" for="suppliername" style="color:#f3f3f3;">Supplier</label>
+            <div class="col-sm-10">
+              <input type="text" name="suppliername" class="form-control" id="suppliername" placeholder="Enter supplier name" required>
+            </div>
+          </div>
+          
            <div class="form-group">
-            <label class="control-label col-sm-2" for="quantity"></label>
+            <label class="control-label col-sm-2" for="supplieremail" style="color:#f3f3f3;">Email</label>
+            <div class="col-sm-10">
+              <input type="email" name="supplieremail" class="form-control" id="supplieremail" placeholder="Enter Supplier email" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="productcost" style="color:#f3f3f3;">Cost</label>
+            <div class="col-sm-10">
+              <input type="number" name="productcost" class="form-control" id="productcost" placeholder="Enter product cost" required>
+            </div>
+          </div>
+           <div class="form-group">
+            <label class="control-label col-sm-2" for="quantity" style="color:#f3f3f3;">Quantity</label>
             <div class="col-sm-10">
               <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter Quantity" required>
             </div>
           </div>
+          
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="productminreq" style="color:#f3f3f3;">Required</label>
+            <div class="col-sm-10">
+              <input type="number" name="productminreq" class="form-control" id="productminreq" placeholder="Enter minimum required in-stock" required>
+            </div>
+          </div>
+                
            <div class="form-group">
-            <label class="control-label col-sm-2" for="image"></label>
+            <label class="control-label col-sm-2" for="image" style="color:#f3f3f3;"></label>
             <div class="col-sm-10">
               <input type="file" name="image" id="image" placeholder="Choose Image" required>
             </div>

@@ -40,7 +40,7 @@ Don't need it, the header.php include takes care of it.
        ?>
      <div class="col-md-6 col-md-offset-3"> 
           <br>
-           <form class="form-horizontal" role="form" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
+           <form class="form-horizontal" role="form" method="post" action="<?php $_SERVER["PHP_SELF"];?>" enctype="multipart/form-data">
            
    <?php 
     /************** Fetching data from database using id ******************/
@@ -83,9 +83,7 @@ Don't need it, the header.php include takes care of it.
              if ($result) {  // Only display result, if the query was successful.
 
     ?>
-
-           
-            <div class="form-group">
+        <div class="form-group">
             <label class="control-label col-sm-2" for="name" style="color:#f3f3f3;">Product</label>
             <div class="col-sm-10">
               <input type="name" name="name" class="form-control" id="name" value="<?php echo $result['productName']; ?>" required>
@@ -100,21 +98,21 @@ Don't need it, the header.php include takes care of it.
           </div>
            
             <div class="form-group">
-            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Supplier</label>
+            <label class="control-label col-sm-2" for="suppliername" style="color:#f3f3f3;">Supplier</label>
             <div class="col-sm-10">
               <input type="text" name="suppliername" class="form-control" id="suppliername" value="<?php echo $result['productSupplier']; ?>" required>
             </div>
           </div>
           
           <div class="form-group">
-            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Email</label>
+            <label class="control-label col-sm-2" for="supplieremail" style="color:#f3f3f3;">Email</label>
             <div class="col-sm-10">
-              <input type="text" name="supplieremail" class="form-control" id="supplieremail" value="<?php echo $result['productEmail']; ?>" required>
+              <input type="email" name="supplieremail" class="form-control" id="supplieremail" value="<?php echo $result['productEmail']; ?>" required>
             </div>
           </div>
           
           <div class="form-group">
-            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Cost</label>
+            <label class="control-label col-sm-2" for="productcost" style="color:#f3f3f3;">Cost</label>
             <div class="col-sm-10">
               <input type="number" name="productcost" class="form-control" id="productcost" value="<?php echo $result['productCost']; ?>" required>
             </div>
@@ -129,21 +127,18 @@ Don't need it, the header.php include takes care of it.
           
            
            <div class="form-group">
-            <label class="control-label col-sm-2" for="description" style="color:#f3f3f3;">Minimum Required</label>
+            <label class="control-label col-sm-2" for="productminreq" style="color:#f3f3f3;">Minimum Required</label>
             <div class="col-sm-10">
-              <input type="text" name="productminreq" class="form-control" id="productminreq" value="<?php echo $result['thresholdQuantity']; ?>" required>
+              <input type="number" name="productminreq" class="form-control" id="productminreq" value="<?php echo $result['thresholdQuantity']; ?>" required>
             </div>
           </div>
            
             <div class="form-group">
             <label class="control-label col-sm-2" for="image"></label>
             <div class="col-sm-10">
-              <input type="file" name="image" id="image" placeholder="Choose Image" required>
+              <input type="file" name="image" id="image" placeholder="Choose Image" >
             </div>
           </div>
-         
-
-        
           <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-10">
               <input type="submit" class="btn btn-primary" name="update_form_pressed" value="Update">
@@ -158,7 +153,6 @@ Don't need it, the header.php include takes care of it.
            <div style="padding: 40px;">
              <div class="thumbnail">
               <a href="edit_product.php?product_id=<?php echo $result['id'] ?>">
-               
                    <?php // Get the image from table and keep in a variable 
                             $image = $result['image'];
                     ?>
@@ -183,7 +177,6 @@ Don't need it, the header.php include takes care of it.
 
     if(isset($_POST['update_form_pressed'])) // is the update button pressed?
     {
-
     // Use the helper function to trim the data submitted through the form
     
     $raw_name = cleandata($_POST['name']);
@@ -229,12 +222,11 @@ Don't need it, the header.php include takes care of it.
     
     // move the submitted image to the permanent folder of 'uploaded_image' 
     
-    move_uploaded_file($collectedImage_temp, "uploaded_image/$collectedImage");   
-
+     move_uploaded_file($collectedImage_temp, "uploaded_image/$collectedImage"); 
         
         //Write your query
 
-        $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity image=:image, thresholdQuantity=:minreq WHERE id=:id");
+        $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity, image=:image, thresholdQuantity=:minreq WHERE id=:id");
 
         //binding values with your variable
         $db->bindvalue(':id',$product_id, PDO::PARAM_INT);
@@ -249,11 +241,11 @@ Don't need it, the header.php include takes care of it.
        
 
         //Execute query statement to send it into the database
-        $run_query = $db->execute();
+        $run = $db->execute();
 
         //Confirm execution and set your messages to display as well has redirection and errors
 
-        if($run_query) // users table successfully updated.
+        if($run) // users table successfully updated.
         {
             redirect('inventory.php');
 

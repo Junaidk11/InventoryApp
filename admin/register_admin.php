@@ -1,7 +1,5 @@
 <!-- 
     In this php file, we're working on the registration of an admin.
-    
-    
 -->
 
 <?php 

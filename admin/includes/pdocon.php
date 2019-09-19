@@ -1,9 +1,5 @@
 <?php
-
 class Pdocon{
-    
-
-    
     // The connection Properties
     
     
