@@ -1,10 +1,8 @@
-        </div><!-- end .container -->
-
+        </div><!-- end .container-fluid -->
         <footer class="text-center" style="color:#777;">
             <hr>
-            <small>Coded by <a href="" target="_blank">Junaid Jawed Khan</a></small>
+            <small>Coded by <a href="https://www.junaidjkhan.com" target="_blank">Junaid Jawed Khan</a></small>
         </footer>
-        
         <!-- jQuery -->
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
         
