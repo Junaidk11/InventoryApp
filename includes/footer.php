@@ -1,8 +1,7 @@
         </div><!-- end .container -->
-
         <footer class="text-center" style="color:#777;">
             <hr>
-            <small>Coded by <a href="" target="_blank">Junaid Jawed Khan</a></small>
+            <small>Coded by <a href="https://www.junaidjkhan.com" target="_blank">Junaid Jawed Khan</a></small>
         </footer>
         
         <!-- jQuery -->
