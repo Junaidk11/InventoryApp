@@ -1,47 +1,12 @@
-<?php include('includes/header.php'); ?>
-
-
-<?php /*Include functions
-
-check to see if user if logged in else redirect to index page
-
- Don't need to - the file already included in the header file. */ ?>
-
-
-
 <?php 
-
-// Collect the customer id from the url to this page, using the GET super global variable
+include('includes/header.php');
 $id = $_GET['cus_id'];
-
-
-/****************Get customer info to ajax *******************/
-
-//require database class files
 require('includes/pdocon.php');
-
-//instatiating our database objects
 $db = new Pdocon; 
-
-
-//Create a query to display customer inf0
-// You must bind the id coming in from the ajax data
 $db->query('SELECT * FROM inventory WHERE id=:id'); 
-
-    
-//Get the id and keep it in a variable from the ajax - already implemented above 
-
-
-//Bind your id
 $db->bindvalue(':id',$id, PDO::PARAM_INT);
-
-//Fetching the data and keep it a row variable
 $row = $db->fetchSingle();
-
-
-//Display this result to ajax
-    if($row){
-        
+if($row){ 
         echo '  <div  class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -62,10 +27,5 @@ $row = $db->fetchSingle();
                         </tbody>
                     </table>
                 </div>';
-    }
-    
-
-
-
+}
 ?>
-
