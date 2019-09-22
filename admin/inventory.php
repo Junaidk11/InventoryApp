@@ -22,13 +22,22 @@ $results = $db->fetchMultiple();
     });
     
 </script>
-  <div class="container">
+<div class="container">
    <!-- Display messages to the users. -->
    <?php showmsg(); ?> 
    <div class = "row" id="emailnotification"><!-- Place Your email notification here --></div>
-   
-  <div class="jumbotron">
-  <small class="pull-right"><a href="add_product.php"> Add Product </a></small>
+   <div class = "row-center"  style="color:white;">
+       <form action="ajax_search_product.php" method="post" id="searchDatabase">
+               <legend style="color:white">Search Inventory</legend> 
+               <fieldset style="color:white;font-size: 20px;"> Product Name: <input name="productname" style="color:black;font-size: 10px;" type="text" placeholder="Enter Product Name" size="150" required />
+               <input  name="Search" type="submit" value="submit" style="color:black;" /></fieldset> 
+       </form>
+    </div>
+   <!-- Search Form result from Ajax Here -->    
+   <div class="row" id="alert_success">
+   </div>
+   <div class="jumbotron">
+   <small class="pull-right"><a href="add_product.php"> Add Product </a></small>
   <?php /*Collect Admin's - From $_SESSION['user_data'] */
     $fullname = $_SESSION['user_data']['fullname']; 
     echo '<small class="pull-left" style="color:#337ab7;">'.$fullname.' | Viewing / Editing </small>';
@@ -66,4 +75,36 @@ $results = $db->fetchMultiple();
      </table>
 </div> <!-- end .jumbotron -->
 </div> <!-- end .container -->
+     
+  
+
+
+<script>   
+    $(document).ready(function(){ 
+     /* Prevents the update form from refreshing when the submit id of the form is set. 
+        #updatedata is the HTML id associated with the update form, the HTML is assigned a function name. */
+        $('#searchDatabase').submit(function(stop_default){ 
+               stop_default.preventDefault();  
+              /* 
+              Call AJAX .post method to send the form data to the database using the ajax_form_post php file.
+              $(this) is a way to tell ajax that the value to be assigned to the variable 'url' is in this page. The value is stored in the attribute "action" of the form that called this .post method. 
+              */ 
+              var url = $(this).attr("action");
+              /*
+                serialize() :  AJAX method serializes all the data coming from the form that was prevented from refreshing.  
+                Note: you can check the serialize data by calling alert(data) to check that the page doesn't refresh and the form data is sent via a small popup window. 
+              */
+              var data = $(this).serialize(); 
+              $.post(url, data, function(confirm_form_submission){
+                  /* the alert_success html id is the div that is holding the form. So we use the div to alert the user that form data was submitted using the .post() AJAX method. 
+                  */
+                  $('#alert_success').html(confirm_form_submission); 
+              }); 
+              /* Next, we want to refresh the form, after submission, if we skip this, the values in the form will still be there.
+                 This will reset the id associated with the form that was just submitted via .post() AJAX method. 
+                 */
+              $('#searchDatabase')[0].reset(); 
+         });
+    });
+</script>
 <?php include('includes/footer.php'); ?>
