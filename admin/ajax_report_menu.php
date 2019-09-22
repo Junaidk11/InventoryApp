@@ -1,48 +1,14 @@
-<?php include('includes/header.php'); ?>
-
-<?php
-/*Include functions
-
-check to see if user if logged in else redirect to index page
-
-Don't need to - the file already included in the header file. */
-?>
-
-
 <?php 
-
-/****************Getting  report menu to ajax *******************/
-
-// Collect the customer id from the url to this page, using the GET super global variable
+include('includes/header.php');
 $id = $_GET['cus_id'];
-
-//require database class files
 require('includes/pdocon.php');
-
-
-//instatiating our database objects
 $db = new Pdocon;
-
-//write a statement to check if the customer id is coming in from the ajax request and write a function to send back the below report menu to ajax, you must bind using the customer id
-
 $db->query('SELECT * FROM inventory WHERE id=:id');
-
 $db->bindvalue(':id',$id, PDO::PARAM_INT);
-
-    //Fetch the result and keep in a rows variable
-
 $row = $db->fetchSingle();
-
-    //Looping through our fetched array in row vairable.   This can go anywhere in the HTML tags
-    if($row){
-        
-        /* Perform some calculations here and Make The report better.  */
+if($row){
         $available = $row['quantity'];
         $threshold = $row['thresholdQuantity'];
-        
-        // We put the div inside 'echo' because we're inside PHP;
-        // Removing 'echo' will result in an error. 
-        
         echo '<div class="col-lg-4 col-md-6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -112,7 +78,4 @@ $row = $db->fetchSingle();
                             </a>
                         </div>
                     </div>';
-    }
-
-
-?>
+ }?>
