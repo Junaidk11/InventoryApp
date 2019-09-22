@@ -29,8 +29,8 @@ $results = $db->fetchMultiple();
    <div class = "row-center"  style="color:white;">
        <form action="ajax_search_product.php" method="post" id="searchDatabase">
                <legend style="color:white">Search Inventory</legend> 
-               <fieldset style="color:white;font-size: 20px;"> Product Name: <input name="productname" style="color:black;font-size: 10px;" type="text" placeholder="Enter Product Name" size="150" required />
-               <input  name="Search" type="submit" value="submit" style="color:black;" /></fieldset> 
+               <fieldset style="color:white;font-size: 10px;"> Product Name: <input name="productname" style="color:black;font-size: 10px;" type="text" placeholder="Enter Product Name" size="150" required />
+               <input  name="Search" type="submit" value="Search" style="color:black;" /></fieldset> 
        </form>
     </div>
    <!-- Search Form result from Ajax Here -->    
@@ -75,10 +75,6 @@ $results = $db->fetchMultiple();
      </table>
 </div> <!-- end .jumbotron -->
 </div> <!-- end .container -->
-     
-  
-
-
 <script>   
     $(document).ready(function(){ 
      /* Prevents the update form from refreshing when the submit id of the form is set. 

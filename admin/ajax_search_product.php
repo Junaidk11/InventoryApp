@@ -9,8 +9,7 @@ $db->bindvalue(':name',$clean_form_data,PDO::PARAM_STR);
 $db->execute();
 $row = $db->fetchSingle();
 if($row){ 
-   echo '<div  class="table-responsive">
-        <table class="table table-bordered table-hover text-center">
+   echo ' <table class="table table-bordered table-hover text-center">
     <thead >
       <tr>
         <th class="text-center">Item ID</th>
@@ -32,13 +31,12 @@ if($row){
         <td>'.$row['productEmail'].'</td>
         <td>'.$row['productCost'].'</td>
         <td>'.$row['quantity'].'</td>
-        <td><img src="uploaded_image/'. $row['image'] .'"style="width:100px;height:100px">?></td>
+        <td><img src="uploaded_image/'. $row['image'] .'"style="width:100px;height:100px"></td>
         <td><a href="reports.php?report_id='.$row['id'].'class="btn btn-primary">View</a></td>
         <td><a href="edit_product.php?product_id='.$row['id'].'" class="btn btn-danger">Edit</a></td> 
       </tr>
     </tbody>
- </table>"
- </div>';
+ </table>';
 }else{
 echo "<p class='bg-success text-center' style='font-weight:bold;'>No results found.</p>";
 }
