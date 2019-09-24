@@ -15,7 +15,7 @@ $results = $db->fetchMultiple();
     $(document).ready(function(){
     
         display_email_supplier();
-        setInterval(function(){ display_email_supplier()}, 3000); 
+        setInterval(function(){ display_email_supplier()}, 60000); 
         function display_email_supplier(){ 
             $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)}) 
     }        
@@ -64,7 +64,7 @@ $results = $db->fetchMultiple();
             <td><?php echo $result['productDescription'] ?></td>
             <td><?php echo $result['productSupplier'] ?></td>
             <td><?php echo $result['productEmail'] ?></td>
-            <td><?php echo $result['productCost'] ?></td>
+            <td>$<?php echo $result['productCost'] ?></td>
             <td><?php echo $result['quantity'] ?></td>
             <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px">'; ?></td>
             <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View</a></td>

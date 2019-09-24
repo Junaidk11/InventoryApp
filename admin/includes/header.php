@@ -50,17 +50,19 @@
                 if(isset($_SESSION['user_is_logged_in'])) 
                 {
                     $fullname = $_SESSION['user_data']['fullname'];
-                    $image = $_SESSION['user_data']['image']; 
+                    $image = $_SESSION['user_data']['image'];  
+                    
                ?>
             <ul class="nav navbar-nav navbar-right">
                  <li class="navbar-text">Welcome, <?php echo $fullname; ?> </li>
                   <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">
-                        <?php echo $image; ?></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="my_admin.php"><i class="fa fa-cog"></i> Account</a></li>
-                                    <li><a href="logout.php"><i class="fa fa-sign-out"></i> Sign-out</a></li>
-                                </ul>
+                        <?php echo $image; ?>
+                   </a>
+                     <ul class="dropdown-menu">
+                        <li><a href="my_admin.php"><i class="fa fa-cog"></i> Account</a></li>
+                        <li><a href="logout.php"><i class="fa fa-sign-out"></i> Sign-out</a></li>
+                    </ul>
                   </li>   
             </ul> 
        <?php } ?>
