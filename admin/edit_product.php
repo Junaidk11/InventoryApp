@@ -72,7 +72,7 @@
                        <div class="form-group">
                             <label class="control-label col-sm-2" for="image"></label>
                             <div class="col-sm-10">
-                              <input type="file" name="image" id="image" placeholder="Choose Image">
+                              <input type =hidden type="file" name="image" id="image" placeholder="Choose Image" value="<?php echo $result['image']; ?>">
                             </div>
                        </div>
                        <div class="form-group"> 
@@ -105,6 +105,7 @@
         Prepare query for database. 
         Bind form data to the query. 
         Send Query to the database. */
+        
     $raw_name = cleandata($_POST['name']);
     $raw_description = cleandata($_POST['description']);
     $raw_supplier = cleandata($_POST['suppliername']);
@@ -134,7 +135,7 @@
     
     require('includes/pdocon.php');  
     $db = new Pdocon;
-    $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity, image=:image, thresholdQuantity=:minreq WHERE id=:id");
+    $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity, thresholdQuantity=:minreq WHERE id=:id");
     $db->bindvalue(':id',$_POST['product_id'], PDO::PARAM_INT);
     $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
     $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
@@ -142,9 +143,9 @@
     $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
     $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
     $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
-    $db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  
+    //$db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  
     $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
-    $run_query = $db->execute();
+    $run_query = $db->execute(); 
     if($run_query) {
             /* 
            Product information successfully updated.
