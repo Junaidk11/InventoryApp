@@ -42,35 +42,34 @@ $results = $db->fetchMultiple();
     $fullname = $_SESSION['user_data']['fullname']; 
     echo '<small class="pull-left" style="color:#337ab7;">'.$fullname.' | Viewing / Editing </small>';
    ?>
-    <h2 class="text-center">Inventory</h2>
+    <h2 class="text-center" style="color:black;">Inventory</h2>
      <table class="table table-bordered table-hover text-center">
         <thead >
           <tr>
-            <th class="text-center">Item ID</th>
-            <th class="text-center">Name</th>
-            <th class="text-center">Description </th>
-            <th class="text-center">Supplier</th>
-            <th class="text-center">Email</th>
-            <th class="text-center">Cost</th>
-            <th class="text-center">Quantity</th>
-            <th class="text-center">Link</th>
-            <th class="text-center">Image</th>
+            <th class="text-center" style="color:black;"></th>
+            <th class="text-center" style="color:black;">Name</th>
+            <th class="text-center" style="color:black;">Description </th>
+            <th class="text-center" style="color:black;">Supplier</th>
+            <th class="text-center" style="color:black;">Email</th>
+            <th class="text-center" style="color:black;">Cost</th>
+            <th class="text-center" style="color:black;">Quantity</th>
+            <th class="text-center" style="color:black;">Image</th>
           </tr>
         </thead>
         <tbody>
     <?php  foreach ($results as $result) { ?>
           <tr>
-            <td><?php echo $result['id'] ?></td>
-            <td><?php echo $result['productName'] ?></td>
-            <td><?php echo $result['productDescription'] ?></td>
-            <td><?php echo $result['productSupplier'] ?></td>
-            <td><?php echo $result['productEmail'] ?></td>
-            <td>$<?php echo $result['productCost'] ?></td>
-            <td><?php echo $result['quantity'] ?></td>
-              <td><a href="https://<?php echo $result['link']; ?>"><?php echo $result['link']; ?></a></td>
+            <td style="color:grey;"><?php echo $result['id'] ?></td>
+            <td style="color:#262626;"><?php echo $result['productName'] ?></td>
+            <td style="color:#262626;"><?php echo $result['productDescription'] ?></td>
+            <td style="color:#262626;"><?php echo $result['productSupplier'] ?></td>
+            <td style="color:#262626;"><?php echo $result['productEmail'] ?></td>
+            <td style="color:#262626;">$<?php echo $result['productCost'] ?></td>
+            <td style="color:#262626;"><?php echo $result['quantity'] ?></td>
             <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px">'; ?></td>
-            <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View</a></td>
-            <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Edit</a></td> 
+            <td><a href="https://<?php echo $result['link']; ?>" class='btn btn-primary'>Link</a></td>
+            <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View Report</a></td>
+            <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Update</a></td> 
           </tr>
           <?php } //end your loop ?>
         </tbody>
