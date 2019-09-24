@@ -72,7 +72,7 @@
                        <div class="form-group">
                             <label class="control-label col-sm-2" for="image"></label>
                             <div class="col-sm-10">
-                              <input type =hidden type="file" name="image" id="image" placeholder="Choose Image" value="<?php echo $result['image']; ?>">
+                              <input type="file" name="image" id="image" placeholder="Choose Image" value="<?php echo $result['image']; ?>">
                             </div>
                        </div>
                        <div class="form-group"> 
@@ -98,6 +98,7 @@
 </div>     
 <?php 
     /****************************************************** Update/Delete product information **************************************************************/ 
+
     if(isset($_POST['update_form_pressed'])){
     /* 
         Trim the data submitted through the form. 
@@ -105,65 +106,130 @@
         Prepare query for database. 
         Bind form data to the query. 
         Send Query to the database. */
-        
-    $raw_name = cleandata($_POST['name']);
-    $raw_description = cleandata($_POST['description']);
-    $raw_supplier = cleandata($_POST['suppliername']);
-    $raw_email = cleandata($_POST['supplieremail']);
-    $raw_cost  = cleandata($_POST['productcost']);
-    $raw_quantity = cleandata($_POST['quantity']);
-    $raw_threshold = cleandata($_POST['productminreq']);
-        
-    $clean_name = sanitizer($raw_name);
-    $clean_description = sanitizer($raw_description);
-    $clean_supplier = sanitizer($raw_supplier);
-    $clean_email = validateemail($raw_email);
-    $clean_cost = validateint($raw_cost);
-    $clean_quantity = validateint($raw_quantity);
-    $clean_threshold =  validateint($raw_threshold); 
-    
-    /* This what happens:
-    
-        Once, the submit button is pressed, FILES super global variable will collect the selected image which has a filename of 'name' and will store it in field 'image' of its associative array. 
-        Next, a copy of the submitted image will be made as shown in the $collectedImage_temp.
-        Next, following form validation, the submitted image will be moved to the permanent location using a PHP move function as shown below.
-        The move_uploaded_file() is the helper php function that moves the uploaded file to its permanent folder. 
-    */
-    $collectedImage = $_FILES['image']['name'];
-    $collectedImage_temp = $_FILES['image']['tmp_name'];
-    move_uploaded_file($collectedImage_temp, "uploaded_image/$collectedImage"); 
-    
-    require('includes/pdocon.php');  
-    $db = new Pdocon;
-    $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity, thresholdQuantity=:minreq WHERE id=:id");
-    $db->bindvalue(':id',$_POST['product_id'], PDO::PARAM_INT);
-    $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
-    $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
-    $db->bindvalue(':supplier',$clean_supplier, PDO::PARAM_STR);
-    $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
-    $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
-    $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
-    //$db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  
-    $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
-    $run_query = $db->execute(); 
-    if($run_query) {
-            /* 
-           Product information successfully updated.
-           Set a success message. 
-           Redirect user to a new page. 
-           */
-            redirect('inventory.php');
-            $message ='<div class="alert alert-Success text-center">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong> Product updated successfully! </strong></div>';
-            keepmsg($message);
-    }else{
-            redirect('edit_product.php?product_id='.$run_query['id'].'');
-            $message ='<div class="alert alert-Failure text-center">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Oops!</strong> Product update unsuccessful. Try again. </div>';
-            keepmsg($message);  
+        if(empty($_FILES['image']['name'])){
+     // No file selected for upload. 
+              
+            $raw_name = cleandata($_POST['name']);
+            $raw_description = cleandata($_POST['description']);
+            $raw_supplier = cleandata($_POST['suppliername']);
+            $raw_email = cleandata($_POST['supplieremail']);
+            $raw_cost  = cleandata($_POST['productcost']);
+            $raw_quantity = cleandata($_POST['quantity']);
+            $raw_threshold = cleandata($_POST['productminreq']);
+
+            $clean_name = sanitizer($raw_name);
+            $clean_description = sanitizer($raw_description);
+            $clean_supplier = sanitizer($raw_supplier);
+            $clean_email = validateemail($raw_email);
+            $clean_cost = validateint($raw_cost);
+            $clean_quantity = validateint($raw_quantity);
+            $clean_threshold =  validateint($raw_threshold); 
+
+            /* This what happens:
+
+                Once, the submit button is pressed, FILES super global variable will collect the selected image which has a filename of 'name' and will store it in field 'image' of its associative array. 
+                Next, a copy of the submitted image will be made as shown in the $collectedImage_temp.
+                Next, following form validation, the submitted image will be moved to the permanent location using a PHP move function as shown below.
+                The move_uploaded_file() is the helper php function that moves the uploaded file to its permanent folder. 
+            */
+            $collectedImage = $_FILES['image']['name'];
+            $collectedImage_temp = $_FILES['image']['tmp_name'];
+            move_uploaded_file($collectedImage_temp, "uploaded_image/$collectedImage"); 
+
+            require('includes/pdocon.php');  
+            $db = new Pdocon;
+            $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity, thresholdQuantity=:minreq WHERE id=:id");
+            $db->bindvalue(':id',$_POST['product_id'], PDO::PARAM_INT);
+            $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
+            $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
+            $db->bindvalue(':supplier',$clean_supplier, PDO::PARAM_STR);
+            $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
+            $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
+            $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
+            //$db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  
+            $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
+            $run_query = $db->execute(); 
+            if($run_query) {
+                    /* 
+                   Product information successfully updated.
+                   Set a success message. 
+                   Redirect user to a new page. 
+                   */
+                    redirect('inventory.php');
+                    $message ='<div class="alert alert-Success text-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong> Product updated successfully! </strong></div>';
+                    keepmsg($message);
+            }else{
+                    redirect('edit_product.php?product_id='.$run_query['id'].'');
+                    $message ='<div class="alert alert-Failure text-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Oops!</strong> Product update unsuccessful. Try again. </div>';
+                    keepmsg($message);  
+                }
+    }elseif(!(empty($_FILES['image']['name']))){
+              
+            $raw_name = cleandata($_POST['name']);
+            $raw_description = cleandata($_POST['description']);
+            $raw_supplier = cleandata($_POST['suppliername']);
+            $raw_email = cleandata($_POST['supplieremail']);
+            $raw_cost  = cleandata($_POST['productcost']);
+            $raw_quantity = cleandata($_POST['quantity']);
+            $raw_threshold = cleandata($_POST['productminreq']);
+
+            $clean_name = sanitizer($raw_name);
+            $clean_description = sanitizer($raw_description);
+            $clean_supplier = sanitizer($raw_supplier);
+            $clean_email = validateemail($raw_email);
+            $clean_cost = validateint($raw_cost);
+            $clean_quantity = validateint($raw_quantity);
+            $clean_threshold =  validateint($raw_threshold); 
+
+            /* This what happens:
+
+                Once, the submit button is pressed, FILES super global variable will collect the selected image which has a filename of 'name' and will store it in field 'image' of its associative array. 
+                Next, a copy of the submitted image will be made as shown in the $collectedImage_temp.
+                Next, following form validation, the submitted image will be moved to the permanent location using a PHP move function as shown below.
+                The move_uploaded_file() is the helper php function that moves the uploaded file to its permanent folder. 
+            */
+            $collectedImage = $_FILES['image']['name'];
+            $collectedImage_temp = $_FILES['image']['tmp_name'];
+            move_uploaded_file($collectedImage_temp, "uploaded_image/$collectedImage"); 
+
+            require('includes/pdocon.php');  
+            $db = new Pdocon;
+            $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity,image=:image ,thresholdQuantity=:minreq WHERE id=:id");
+            $db->bindvalue(':id',$_POST['product_id'], PDO::PARAM_INT);
+            $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
+            $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
+            $db->bindvalue(':supplier',$clean_supplier, PDO::PARAM_STR);
+            $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
+            $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
+            $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
+            $db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  
+            $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
+            $run_query = $db->execute(); 
+            if($run_query) {
+                    /* 
+                   Product information successfully updated.
+                   Set a success message. 
+                   Redirect user to a new page. 
+                   */
+                    redirect('inventory.php');
+                    $message ='<div class="alert alert-Success text-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong> Product updated successfully! </strong></div>';
+                    keepmsg($message);
+            }else{
+                    redirect('edit_product.php?product_id='.$run_query['id'].'');
+                    $message ='<div class="alert alert-Failure text-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Oops!</strong> Product update unsuccessful. Try again. </div>';
+                    keepmsg($message);  
+                }
+            
         }
+
 }elseif(isset($_POST['delete_form_pressed'])){ 
         /*
           Delete button pressed.
