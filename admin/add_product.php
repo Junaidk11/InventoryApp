@@ -15,6 +15,7 @@ if(isset($_POST['submit_product']))
     $raw_email = cleandata($_POST['supplieremail']);
     $raw_cost  = cleandata($_POST['productcost']);
     $raw_quantity = cleandata($_POST['quantity']);
+    $raw_link = cleandata($_POST['website']);
     $raw_threshold = cleandata($_POST['productminreq']);
     
     $clean_name = sanitizer($raw_name);
@@ -23,6 +24,7 @@ if(isset($_POST['submit_product']))
     $clean_email = validateemail($raw_email);
     $clean_cost = validateint($raw_cost);
     $clean_quantity = validateint($raw_quantity);
+    $clean_link = sanitizer($raw_link);
     $clean_threshold =  validateint($raw_threshold); 
     
     /* 
@@ -63,7 +65,7 @@ if(isset($_POST['submit_product']))
         keepmsg($message);
     }else{
         /* Product doesn't exist. Add Product to database. */
-        $db->query("INSERT INTO inventory(id, productName, productDescription, productSupplier, productEmail, productCost, quantity, thresholdQuantity, image) VALUES(NULL,:name,:description, :supplier, :email, :cost, :quantity, :minreq, :image)");
+        $db->query("INSERT INTO inventory(id, productName, productDescription, productSupplier, productEmail, productCost, quantity, link thresholdQuantity, image) VALUES(NULL,:name,:description, :supplier, :email, :cost, :quantity, :link, :minreq, :image)");
     
         $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
         $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
@@ -71,6 +73,7 @@ if(isset($_POST['submit_product']))
         $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
         $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
         $db->bindvalue(':quantity',$clean_quantity,PDO::PARAM_INT);
+        $db->bindvalue(':link',$clean_link,PDO::PARAM_STR);
         $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
         $db->bindvalue(':image',$collectedImage,PDO::PARAM_STR);
         $run_query = $db->execute();
@@ -137,6 +140,12 @@ if(isset($_POST['submit_product']))
             <label class="control-label col-sm-2" for="quantity" style="color:#f3f3f3;">Quantity</label>
             <div class="col-sm-10">
               <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter quantity" required>
+            </div>
+          </div>
+           <div class="form-group">
+            <label class="control-label col-sm-2" for="website" style="color:#f3f3f3;">Link</label>
+            <div class="col-sm-10">
+              <input type="text" name="website" class="form-control" id="website" placeholder="Enter link" required>
             </div>
           </div>
           

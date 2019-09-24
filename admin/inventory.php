@@ -53,6 +53,7 @@ $results = $db->fetchMultiple();
             <th class="text-center">Email</th>
             <th class="text-center">Cost</th>
             <th class="text-center">Quantity</th>
+            <th class="text-center">Link</th>
             <th class="text-center">Image</th>
           </tr>
         </thead>
@@ -66,6 +67,7 @@ $results = $db->fetchMultiple();
             <td><?php echo $result['productEmail'] ?></td>
             <td>$<?php echo $result['productCost'] ?></td>
             <td><?php echo $result['quantity'] ?></td>
+              <td><a href="https://<?php echo $result['link']; ?>"><?php echo $result['link']; ?></a></td>
             <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px">'; ?></td>
             <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View</a></td>
             <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Edit</a></td> 

@@ -57,6 +57,12 @@
                             </div>
                        </div>
                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="quantity" style="color:#f3f3f3;">Link</label>
+                            <div class="col-sm-10">
+                              <input type="text" name="website" class="form-control" id="website" value="<?php echo $result['link']; ?>" required>
+                            </div>
+                       </div>
+                       <div class="form-group">
                             <label class="control-label col-sm-2" for="productminreq" style="color:#f3f3f3;">Minimum Required</label>
                             <div class="col-sm-10">
                               <input type="number" name="productminreq" class="form-control" id="productminreq" value="<?php echo $result['thresholdQuantity']; ?>" required>
@@ -115,6 +121,7 @@
             $raw_email = cleandata($_POST['supplieremail']);
             $raw_cost  = cleandata($_POST['productcost']);
             $raw_quantity = cleandata($_POST['quantity']);
+            $raw_link = cleandata($_POST['website']);
             $raw_threshold = cleandata($_POST['productminreq']);
 
             $clean_name = sanitizer($raw_name);
@@ -123,6 +130,7 @@
             $clean_email = validateemail($raw_email);
             $clean_cost = validateint($raw_cost);
             $clean_quantity = validateint($raw_quantity);
+            $clean_link = sanitizer($raw_link);
             $clean_threshold =  validateint($raw_threshold); 
 
             /* This what happens:
@@ -138,7 +146,7 @@
 
             require('includes/pdocon.php');  
             $db = new Pdocon;
-            $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity, thresholdQuantity=:minreq WHERE id=:id");
+            $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity, link=:link, thresholdQuantity=:minreq WHERE id=:id");
             $db->bindvalue(':id',$_POST['product_id'], PDO::PARAM_INT);
             $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
             $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
@@ -146,6 +154,7 @@
             $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
             $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
             $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
+            $db->bindvalue(':link',$clean_link, PDO::PARAM_STR);
             //$db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  
             $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
             $run_query = $db->execute(); 
@@ -175,6 +184,7 @@
             $raw_email = cleandata($_POST['supplieremail']);
             $raw_cost  = cleandata($_POST['productcost']);
             $raw_quantity = cleandata($_POST['quantity']);
+            $raw_link = cleandata($_POST['website']);
             $raw_threshold = cleandata($_POST['productminreq']);
 
             $clean_name = sanitizer($raw_name);
@@ -183,6 +193,7 @@
             $clean_email = validateemail($raw_email);
             $clean_cost = validateint($raw_cost);
             $clean_quantity = validateint($raw_quantity);
+            $clean_link = sanitizer($raw_link);
             $clean_threshold =  validateint($raw_threshold); 
 
             /* This what happens:
@@ -198,7 +209,7 @@
 
             require('includes/pdocon.php');  
             $db = new Pdocon;
-            $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity,image=:image ,thresholdQuantity=:minreq WHERE id=:id");
+            $db->query("UPDATE inventory SET productName=:name, productDescription=:description, productSupplier=:supplier, productEmail=:email, productCost=:cost, quantity=:quantity,link=:link, image=:image ,thresholdQuantity=:minreq WHERE id=:id");
             $db->bindvalue(':id',$_POST['product_id'], PDO::PARAM_INT);
             $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
             $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
@@ -206,6 +217,7 @@
             $db->bindvalue(':email',$clean_email, PDO::PARAM_STR);
             $db->bindvalue(':cost',$clean_cost, PDO::PARAM_INT);
             $db->bindvalue(':quantity',$clean_quantity, PDO::PARAM_INT);
+            $db->bindvalue(':link', $clean_link, PDO::PARAM_STR);
             $db->bindvalue(':image', $collectedImage, PDO::PARAM_STR);  
             $db->bindvalue(':minreq',$clean_threshold, PDO::PARAM_INT);
             $run_query = $db->execute(); 
