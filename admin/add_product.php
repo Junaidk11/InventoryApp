@@ -65,7 +65,7 @@ if(isset($_POST['submit_product']))
         keepmsg($message);
     }else{
         /* Product doesn't exist. Add Product to database. */
-        $db->query("INSERT INTO inventory(id, productName, productDescription, productSupplier, productEmail, productCost, quantity, link thresholdQuantity, image) VALUES(NULL,:name,:description, :supplier, :email, :cost, :quantity, :link, :minreq, :image)");
+        $db->query("INSERT INTO inventory(id, productName, productDescription, productSupplier, productEmail, productCost, quantity, link, thresholdQuantity, image) VALUES(NULL,:name,:description, :supplier, :email, :cost, :quantity, :link, :minreq, :image)");
     
         $db->bindvalue(':name',$clean_name, PDO::PARAM_STR);
         $db->bindvalue(':description',$clean_description,PDO::PARAM_STR);
