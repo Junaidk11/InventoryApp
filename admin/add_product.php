@@ -126,14 +126,14 @@ if(isset($_POST['submit_product']))
            <div class="form-group">
             <label class="control-label col-sm-2" for="supplieremail" style="color:#f3f3f3;">Email</label>
             <div class="col-sm-10">
-              <input type="email" name="supplieremail" class="form-control" id="supplieremail" placeholder="Enter supplier email" required>
+              <input type="email" name="supplieremail" class="form-control" id="supplieremail" placeholder="Enter supplier email" >
             </div>
           </div>
           
           <div class="form-group">
             <label class="control-label col-sm-2" for="productcost" style="color:#f3f3f3;">Cost</label>
             <div class="col-sm-10">
-              <input type="number" name="productcost" class="form-control" id="productcost" placeholder="Enter product cost" required>
+              <input type="number" name="productcost" class="form-control" id="productcost" placeholder="Enter product cost">
             </div>
           </div>
            <div class="form-group">

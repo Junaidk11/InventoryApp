@@ -50,8 +50,8 @@ $results = $db->fetchMultiple();
             <th class="text-center" style="color:black;">Name</th>
             <th class="text-center" style="color:black;">Description </th>
             <th class="text-center" style="color:black;">Supplier</th>
-            <th class="text-center" style="color:black;">Email</th>
-            <th class="text-center" style="color:black;">Cost</th>
+           <!-- <th class="text-center" style="color:black;">Email</th> -->
+            <!--<th class="text-center" style="color:black;">Cost</th>-->
             <th class="text-center" style="color:black;">Quantity</th>
             <th class="text-center" style="color:black;">Image</th>
           </tr>
@@ -63,8 +63,8 @@ $results = $db->fetchMultiple();
             <td style="color:#262626;"><?php echo $result['productName'] ?></td>
             <td style="color:#262626;"><?php echo $result['productDescription'] ?></td>
             <td style="color:#262626;"><?php echo $result['productSupplier'] ?></td>
-            <td style="color:#262626;"><?php echo $result['productEmail'] ?></td>
-            <td style="color:#262626;">$<?php echo $result['productCost'] ?></td>
+           <!-- <td style="color:#262626;"><?php echo $result['productEmail'] ?></td> -->
+            <!-- <td style="color:#262626;">$<?php echo $result['productCost'] ?></td> -->
             <td style="color:#262626;"><?php echo $result['quantity'] ?></td>
             <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px">'; ?></td>
             <td><a href="https://<?php echo $result['link']; ?>" class='btn btn-primary'>Link</a></td>
