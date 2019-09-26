@@ -41,13 +41,13 @@
                        <div class="form-group">
                             <label class="control-label col-sm-2" for="supplieremail" style="color:#f3f3f3;">Email</label>
                             <div class="col-sm-10">
-                              <input type="email" name="supplieremail" class="form-control" id="supplieremail" value="<?php echo $result['productEmail']; ?>" required>
+                              <input type="email" name="supplieremail" class="form-control" id="supplieremail" value="<?php echo $result['productEmail']; ?>">
                             </div>
                        </div>
                        <div class="form-group">
                             <label class="control-label col-sm-2" for="productcost" style="color:#f3f3f3;">Cost</label>
                             <div class="col-sm-10">
-                              <input type="number" name="productcost" class="form-control" id="productcost" value="<?php echo $result['productCost']; ?>" required>
+                              <input type="number" name="productcost" class="form-control" id="productcost" value="<?php echo $result['productCost']; ?>">
                             </div>
                        </div>
                        <div class="form-group">
@@ -59,7 +59,7 @@
                        <div class="form-group">
                             <label class="control-label col-sm-2" for="quantity" style="color:#f3f3f3;">Link</label>
                             <div class="col-sm-10">
-                              <input type="text" name="website" class="form-control" id="website" value="<?php echo $result['link']; ?>" required>
+                              <input type="text" name="website" class="form-control" id="website" value="<?php echo $result['link']; ?>">
                             </div>
                        </div>
                        <div class="form-group">

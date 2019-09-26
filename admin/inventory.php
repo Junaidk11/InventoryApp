@@ -49,7 +49,7 @@ $results = $db->fetchMultiple();
             <th class="text-center" style="color:black;"></th>
             <th class="text-center" style="color:black;">Name</th>
             <th class="text-center" style="color:black;">Description </th>
-            <th class="text-center" style="color:black;">Supplier</th>
+            <!--<th class="text-center" style="color:black;">Supplier</th> -->
            <!-- <th class="text-center" style="color:black;">Email</th> -->
             <!--<th class="text-center" style="color:black;">Cost</th>-->
             <th class="text-center" style="color:black;">Quantity</th>
@@ -62,7 +62,7 @@ $results = $db->fetchMultiple();
             <td style="color:grey;"><?php echo $result['id'] ?></td>
             <td style="color:#262626;"><?php echo $result['productName'] ?></td>
             <td style="color:#262626;"><?php echo $result['productDescription'] ?></td>
-            <td style="color:#262626;"><?php echo $result['productSupplier'] ?></td>
+            <!-- <td style="color:#262626;"><?php echo $result['productSupplier'] ?></td>-->
            <!-- <td style="color:#262626;"><?php echo $result['productEmail'] ?></td> -->
             <!-- <td style="color:#262626;">$<?php echo $result['productCost'] ?></td> -->
             <td style="color:#262626;"><?php echo $result['quantity'] ?></td>
