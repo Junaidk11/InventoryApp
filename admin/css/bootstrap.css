@@ -4854,7 +4854,7 @@ a.badge:focus {
 }
 .jumbotron p {
   margin-bottom: 15px;
-  font-size: 21px;
+  font-size: 10px;
   font-weight: 200;
 }
 .jumbotron > hr {

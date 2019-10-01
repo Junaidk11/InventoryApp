@@ -119,7 +119,7 @@ if(isset($_POST['submit_product']))
              <div class="form-group">
             <label class="control-label col-sm-2" for="suppliername" style="color:#f3f3f3;">Supplier</label>
             <div class="col-sm-10">
-              <input type="text" name="suppliername" class="form-control" id="suppliername" placeholder="Enter supplier name" required>
+              <input type="text" name="suppliername" class="form-control" id="suppliername" placeholder="Enter supplier name">
             </div>
           </div>
           
@@ -139,7 +139,7 @@ if(isset($_POST['submit_product']))
            <div class="form-group">
             <label class="control-label col-sm-2" for="quantity" style="color:#f3f3f3;">Quantity</label>
             <div class="col-sm-10">
-              <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter quantity" required>
+              <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter quantity">
             </div>
           </div>
            <div class="form-group">
@@ -152,7 +152,7 @@ if(isset($_POST['submit_product']))
           <div class="form-group">
             <label class="control-label col-sm-2" for="productminreq" style="color:#f3f3f3;">Required</label>
             <div class="col-sm-10">
-              <input type="number" name="productminreq" class="form-control" id="productminreq" placeholder="Enter minimum required in-stock" required>
+              <input type="number" name="productminreq" class="form-control" id="productminreq" placeholder="Enter minimum required in-stock"required>
             </div>
           </div>
                 
