@@ -14,28 +14,21 @@ if($results){
    echo ' <table class="table table-bordered table-hover text-center">
     <thead >
       <tr>
-        <th class="text-center">Item ID</th>
         <th class="text-center">Name</th>
         <th class="text-center">Description </th>
-        <th class="text-center">Supplier</th>
-        <th class="text-center">Email</th>
-        <th class="text-center">Cost</th>
         <th class="text-center">Quantity</th>
         <th class="text-center">Image</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>'.$result['id'].'</td>
         <td>'.$result['productName'].'</td>
         <td>'.$result['productDescription'].'</td>
-        <td>'.$result['productSupplier'].'</td>
-        <td>'.$result['productEmail'].'</td>
-        <td>'.$result['productCost'].'</td>
         <td>'.$result['quantity'].'</td>
         <td><img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px"></td>
-        <td><a href="reports.php?report_id='.$result['id'].'class="btn btn-primary">View</a></td>
-        <td><a href="edit_product.php?product_id='.$result['id'].'" class="btn btn-danger">Edit</a></td> 
+        <td><a href="https://'.$result['link'].'" class= btn btn-primary >Link</a></td>
+        <td><a href="reports.php?report_id='.$result['id'].'" class=btn btn-primary>View Report</a></td>
+        <td><a href="edit_product.php?product_id='.$result['id'].'" class=btn btn-danger>Update</a></td> 
       </tr>
     </tbody>
  </table>';
@@ -44,3 +37,6 @@ if($results){
 echo "<p class='bg-success text-center' style='font-weight:bold;'>No results found.</p>";
 }
 ?>
+
+
+ 
