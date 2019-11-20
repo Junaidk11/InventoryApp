@@ -25,7 +25,7 @@
                                 $db->query("SELECT * FROM inventory WHERE id=:id");
                                 $db->bindvalue(':id',$product_id, PDO::PARAM_INT);  
                                 $result = $db->fetchSingle(); 
-                                if ($result) {?>
+                                if ($result) { ?>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name" style="color:#f3f3f3;">Product</label>
                             <div class="col-sm-10">

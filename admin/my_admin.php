@@ -14,7 +14,7 @@
 <div class ="page-header">
     
       <div class ="pull-right" style="color: white;border-bottom:white;">
-          <a href="inventory.php"><h2 class="pull-right" style="color: white;"> Inventory</h2></a>
+          <a href="inventory.php"><h2 class="pull-right" style="color: white;">Home</h2></a>
       </div>
       <h2 class="text-center" style="color: white;"> Account Information </h2>
 </div>

@@ -50,8 +50,7 @@
                 if(isset($_SESSION['user_is_logged_in'])) 
                 {
                     $fullname = $_SESSION['user_data']['fullname'];
-                    $image = $_SESSION['user_data']['image'];  
-                    
+                    $image = $_SESSION['user_data']['image'];     
                ?>
             <ul class="nav navbar-nav navbar-right">
                  <li class="navbar-text">Welcome, <?php echo $fullname; ?> </li>
@@ -70,6 +69,4 @@
         </div>
     </nav>
 <?php } ?>   
-    <div class="container-fluid">
-
-    
+    <div class="container-fluid"> 
