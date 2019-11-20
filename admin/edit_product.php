@@ -1,13 +1,19 @@
 <?php include('includes/header.php'); ?>
-<div class="well"> 
-  <small class="pull-right"><a href="inventory.php"> View Inventory</a></small>
-   <?php echo '<small class="pull-left" style="color:#337ab7;">'. $_SESSION['user_data']['fullname'].' | Editing </small>'; ?>
-   <h2 class="text-center">Product Information</h2>
-</div> 
+
+
+<div class ="page-header">
+      <div class ="pull-right" style="color: white;border-bottom:white;">
+          <a href="inventory.php"><h2 class="pull-right" style="color: white;"> Inventory</h2></a>
+      </div>
+      <h2 class="text-center" style="color: white;">  Product Information </h2>
+
+</div>
 <div class="container">
-        <div class="rows">
-            <!--  Display any messages that are set in the session 'msg'-->
+        <!--  Display any messages that are set in the session 'msg'-->
             <?php showmsg(); ?>
+        
+        <div class="rows">
+            
             <div class="col-md-6 col-md-offset-3"> 
                    <form class="form-horizontal" role="form" method="post" action="edit_product.php" enctype="multipart/form-data">
                      <!-- ************** Fetching data from database using id ****************** -->
@@ -57,7 +63,7 @@
                             </div>
                        </div>
                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="quantity" style="color:#f3f3f3;">Link</label>
+                            <label class="control-label col-sm-2" for="website" style="color:#f3f3f3;">Link</label>
                             <div class="col-sm-10">
                               <input type="text" name="website" class="form-control" id="website" value="<?php echo $result['link']; ?>">
                             </div>
@@ -94,7 +100,7 @@
                      <div class="thumbnail">
                       <a href="edit_product.php?product_id=<?php echo $result['id']; ?>">
                         <?php /* Get the image from table and keep in a variable.*/  $image = $result['image'];  ?>
-                        <?php /*echo  image folder and concatinate it with a style.*/ echo '<img src="uploaded_image/'. $image .'"style="width:150px;height:150px">'; ?> 
+                        <?php /*echo  image folder and concatinate it with a style.*/ echo '<img src="uploaded_image/'. $image .'"style="width:300px;height:300px" class="img-square img-responsive">'; ?> 
                       </a>
                     </div>
                </div>
@@ -165,15 +171,15 @@
                    Redirect user to a new page. 
                    */
                     redirect('inventory.php');
-                    $message ='<div class="alert alert-Success text-center">
+                    $message ='<div class="alert alert-success alert-dismissible fade in text-center" style="background-color:white;">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong> Product updated successfully! </strong></div>';
+            <strong> Product updated successfully.</strong></div>';
                     keepmsg($message);
             }else{
                     redirect('edit_product.php?product_id='.$run_query['id'].'');
-                    $message ='<div class="alert alert-Failure text-center">
+                    $message ='<div class="alert alert-failure alert-dismissible fade in text-center" style="background-color:white;">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Oops!</strong> Product update unsuccessful. Try again. </div>';
+            <strong>Product update unsuccessful. Try again.</strong> </div>';
                     keepmsg($message);  
                 }
     }elseif(!(empty($_FILES['image']['name']))){
@@ -228,15 +234,15 @@
                    Redirect user to a new page. 
                    */
                     redirect('inventory.php');
-                    $message ='<div class="alert alert-Success text-center">
+                    $message ='<div class="alert alert-success alert-dismissible fade in text-center" style="background-color:white;">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong> Product updated successfully! </strong></div>';
+            <strong> Product updated successfully. </strong></div>';
                     keepmsg($message);
             }else{
                     redirect('edit_product.php?product_id='.$run_query['id'].'');
-                    $message ='<div class="alert alert-Failure text-center">
+                    $message ='<div class="alert alert-failure alert-dismissible fade in text-center" style="background-color:white;">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Oops!</strong> Product update unsuccessful. Try again. </div>';
+            <strong>Product update unsuccessful. Try again.</strong></div>';
                     keepmsg($message);  
                 }
             
@@ -248,7 +254,7 @@
           Confirm to continue with deleting the product. 
           */  
             redirect('edit_product.php?product_id='.$_POST['product_id'].'');
-            $message = '<div class="alert alert-danger text-center">
+            $message = '<div class="alert alert-danger alert-dismissible fade in text-center" style="background-color:white;">
           <strong>Confirmation</strong><br> Are you user you want to delete this product?<br>
           <a href="#" class="btn btn-default" data-dismiss="alert" aria-label="close">No</a>
           <br>
@@ -275,15 +281,15 @@
         if($run_query){
              /* Delete Successful. */
             redirect('inventory.php'); 
-            $message = '<div class="alert alert-success text-center">
+            $message = '<div class="alert alert-success alert-dismissible fade in text-center" style="background-color:white;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <strong>Product deleted successfully!</strong></div>'; 
             keepmsg($message);       
         }else{
             redirect('edit_product.php?product_id='.$delete_id.'');
-            $message = '<div class="alert alert-danger text-center">
+            $message = '<div class="alert alert-danger alert-dismissible fade in text-center" style="background-color:white;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Oops!</strong> Delete unsuccessful. Try again. </div>'; 
+      <strong>Delete unsuccessful. Try again.</strong></div>'; 
             keepmsg($message);
         }
 }
