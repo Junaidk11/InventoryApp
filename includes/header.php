@@ -21,6 +21,11 @@
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        
+        <!-- Responsive CCS -->
+        
+        <style>
+        </style>
     </head>
     <body style="padding-top: 30px;">            
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
@@ -45,8 +50,9 @@
              <!--else if the user is not loggin in then show this, open else-block code in php, close PHP to execute HTML code -->
               
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.php">Welcome Guest!</a></li>
+                    <li><p><a href="../index.php">Login</a></p></li>
                 </ul>
+                
                  <?php } ?> <!-- Close your else in PHP to close the else block -->
             </div>
         </div>

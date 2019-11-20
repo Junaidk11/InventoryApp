@@ -1,9 +1,6 @@
 <?php /* Include header file of the index page.  */  include('../includes/header.php'); include('includes/functions.php'); ?>
 <div class="row">
       <div class="col-md-4 col-md-offset-4">
-          <p class=""><a class="pull-right" href="../index.php"> Login</a></p>
-      </div>
-      <div class="col-md-4 col-md-offset-4">
             <form class="form-horizontal" role="form" method="post" action="register_admin.php" enctype="multipart/form-data">
               <div class="form-group">
                 <label class="control-label col-sm-2" for="name"></label>
@@ -125,11 +122,13 @@
             */
             echo'<div class="alert alert-Success text-center">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Congrats!</strong> Admin registeration successful! Please login. </div>';
+  <strong>Congrats!</strong> Registeration successful! Please login. </div>';
+            
         }else{
             echo'<div class="alert alert-Failure text-center">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Sorry!</strong> Admin registeration unsuccessful. Please try again. </div>';  
+  <strong>Sorry!</strong> Registeration unsuccessful. Please try again. </div>';  
+            
         }    
     }         
 }?>

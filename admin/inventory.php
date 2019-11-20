@@ -19,34 +19,46 @@ $results = $db->fetchMultiple();
         function display_email_supplier(){ 
             $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)}) 
     }        
-    });
+    });  </script>
+<style>
     
-</script>
+</style>
 <div class="container">
    <!-- Display messages to the users. -->
-   <?php showmsg(); ?> 
-   <div class = "row" id="emailnotification"><!-- Place Your email notification here --></div>
-   <div class = "row-center"  style="color:white;">
-       <form action="ajax_search_product.php" method="post" id="searchDatabase">
-               <legend style="color:white">Search Inventory</legend> 
-               <fieldset style="color:white;font-size: 10px;"> Product Name: <input name="productname" style="color:black;font-size: 10px;" type="text" placeholder="Enter Product Name" size="150" required />
-               <input  name="Search" type="submit" value="Search" style="color:black;" /></fieldset> 
-       </form>
+   <?php showmsg(); ?>  
+   <div class ="page-header" style="color: white;">
+    <h2 class="text-center"> Search Inventory </h2>
+  </div>
+  <div class="jumbotron">
+         <div class = "row" >
+             <form class="form-inline" action="ajax_search_product.php" method="post" id="searchDatabase">
+                     <div class="form-group">
+                      <label for="productname" style="color: black;"> Product Name: </label>
+                      <input type="text" class="form-control" id="productname" name="productname">
+                    </div>
+                    <button type="submit" class="btn btn-default" style="color:black;">Search</button>
+             </form>
+         </div>
+         <!-- Place Your email notification here -->
+         <div class = "row" id="emailnotification"></div>
+         <!-- Search Form result from Ajax Here -->    
+         <div class="row" id="alert_success"></div>
+   </div>  
+   
+   
+   <div class="page-header" style="color: white;">
+      <h2 class="text-center"> Inventory </h2>
     </div>
-   <!-- Search Form result from Ajax Here -->    
-   <div class="row" id="alert_success">
-   </div>
+
    <div class="jumbotron">
-   <small class="pull-right"><a href="add_product.php"> Add Product </a></small>
-  <?php /*Collect Admin's - From $_SESSION['user_data'] */
-    $fullname = $_SESSION['user_data']['fullname']; 
-    echo '<small class="pull-left" style="color:#337ab7;">'.$fullname.' | Viewing / Editing </small>';
-   ?>
-    <h2 class="text-center" style="color:black;">Inventory</h2>
+       <small class="pull-right"><a href="add_product.php"> Add Product </a></small>
+          <?php $fullname = $_SESSION['user_data']['fullname'];  echo '<small class="pull-left" style="color:#337ab7;">'.$fullname.' | Viewing / Editing </small>';?> 
+
+
      <table class="table table-bordered table-hover text-center">
         <thead >
           <tr>
-            <th class="text-center" style="color:black;"></th>
+            <th class="text-center" style="color:black;">ID</th>
             <th class="text-center" style="color:black;">Name</th>
             <th class="text-center" style="color:black;">Description </th>
             <!--<th class="text-center" style="color:black;">Supplier</th> -->
@@ -74,8 +86,10 @@ $results = $db->fetchMultiple();
           <?php } //end your loop ?>
         </tbody>
      </table>
-</div> <!-- end .jumbotron -->
+ </div> <!-- end .jumbotron -->  
 </div> <!-- end .container -->
+
+
 <script>   
     $(document).ready(function(){ 
      /* Prevents the update form from refreshing when the submit id of the form is set. 
@@ -102,6 +116,5 @@ $results = $db->fetchMultiple();
                  */
               $('#searchDatabase')[0].reset(); 
          });
-    });
-</script>
+    });</script>
 <?php include('includes/footer.php'); ?>
