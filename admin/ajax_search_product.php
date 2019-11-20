@@ -11,7 +11,9 @@ $db->execute();
 $results = $db->fetchMultiple();
 if($results){ 
     foreach ($results as $result){
-   echo ' <div class="table-responsive">
+   echo ' <div class="alert alert-success alert-dismissible fade in">
+   <a href="#" class="close" data-dimiss="alert" aria-label="close"> &times;</a>
+   <div class="table-responsive">
    <table class="table table-bordered table-hover text-center">
     <thead >
       <tr>
@@ -33,10 +35,14 @@ if($results){
       </tr>
     </tbody>
  </table>
+ </div>
  </div>';
     }
 }else{
-echo "<p class='bg-success text-center' style='font-weight:bold;'>No results found.</p>";
+echo "<div class='alert alert-danger alert-dismissible fade in'>
+      <a href='#' class='close' data-dimiss='alert' aria-label='close'> &times;</a>
+      <strong> No results found. </strong> 
+      </div>'";
 }
 ?>
 

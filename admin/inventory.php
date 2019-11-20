@@ -25,7 +25,7 @@ $results = $db->fetchMultiple();
 </style>
 <div class="container">
    <!-- Display messages to the users. -->
-   <?php showmsg(); ?>  
+    <?php showmsg(); ?>  
    <div class ="page-header" style="color: white;">
     <h2 class="text-center"> Search Inventory </h2>
 </div>
