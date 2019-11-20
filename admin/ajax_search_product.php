@@ -40,7 +40,7 @@ if($results){
     }
 }else{
         echo '<div class="alert alert-info alert-dismissible fade in">
-      <a href="#" class="close" data-dimiss="alert" aria-label="close"> &times;</a>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
        <p> No results found. 
       </div>';
 }

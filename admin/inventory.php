@@ -24,8 +24,9 @@ $results = $db->fetchMultiple();
 <div class="container">
    <!-- Display messages to the users. -->
     <?php showmsg(); ?>  
-   <div class ="page-header" style="color: white;">
-    <h2 class="text-center"> Search Inventory </h2>
+   <div class ="page-header" style="color: white;border-bottom:white;">
+    <p class="pull-left"> Search Inventory 
+    <a href="add_product.php" style="color:white;"><p class="pull-right"> Add Product </p></a></p>
 </div>
 <div class="jumbotron">
          <div class = "row" >
@@ -47,7 +48,6 @@ $results = $db->fetchMultiple();
       <h2 class="text-center"> Inventory </h2>
 </div>
 <div class="jumbotron">
-      <small class="pull-right"><a href="add_product.php" style="color:black;font-size: 20"> Add Product </a></small>
      <div class="table-responsive">
          <table class="table table-bordered table-hover text-center">
             <thead>
