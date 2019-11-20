@@ -11,30 +11,38 @@ $db->execute();
 $results = $db->fetchMultiple();
 if($results){ 
     foreach ($results as $result){
-   echo ' <table class="table table-bordered table-hover text-center">
+      echo'<div class="alert alert-info alert-dismissible fade in"> 
+   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+   <div class="table-responsive">
+   <table class="table table-bordered table-hover text-center">
     <thead >
       <tr>
-        <th class="text-center">Name</th>
-        <th class="text-center">Description </th>
-        <th class="text-center">Quantity</th>
-        <th class="text-center">Image</th>
+        <th class="text-center" style="color:black;">Name</th>
+        <th class="text-center" style="color:black;">Description </th>
+        <th class="text-center" style="color:black;">Quantity</th>
+        <th class="text-center" style="color:black;">Image</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>'.$result['productName'].'</td>
-        <td>'.$result['productDescription'].'</td>
-        <td>'.$result['quantity'].'</td>
-        <td><img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px"></td>
-        <td><a href="https://'.$result['link'].'" class= btn btn-primary >Link</a></td>
-        <td><a href="reports.php?report_id='.$result['id'].'" class=btn btn-primary>View Report</a></td>
-        <td><a href="edit_product.php?product_id='.$result['id'].'" class=btn btn-danger>Update</a></td> 
+        <td style="color:#262626;">'.$result['productName'].'</td>
+        <td style="color:#262626;">'.$result['productDescription'].'</td>
+        <td style="color:#262626;">'.$result['quantity'].'</td>
+        <td><img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px" class="img-circle"></td>
+        <td><a href="https://'.$result['link'].'" class= "btn btn-primary" >Link</a></td>
+        <td><a href="reports.php?report_id='.$result['id'].'" class="btn btn-primary">View Report</a></td>
+        <td><a href="edit_product.php?product_id='.$result['id'].'" class="btn btn-danger">Update</a></td> 
       </tr>
     </tbody>
- </table>';
+ </table>
+ </div>
+ </div>';
     }
 }else{
-echo "<p class='bg-success text-center' style='font-weight:bold;'>No results found.</p>";
+        echo '<div class="alert alert-info alert-dismissible fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
+       <p> No results found. 
+      </div>';
 }
 ?>
 

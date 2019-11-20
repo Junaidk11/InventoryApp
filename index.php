@@ -83,8 +83,14 @@ if (isset($_POST['submit_login']))
 ?>
    <!-- The INDEX page of the Inventory Manager. -->
   <div class="row">
+
+    <?php echo '<div class="alert alert-success alert-dismissible fade in text-center">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Welcome to Inventory Manager! Please login with your credentials or sign up!</strong> </div>'
+  ?>
       <div class="col-md-4 col-md-offset-4">
-          <p class=""><a class="pull-right" href="admin/register_admin.php"> Register User</a></p><br>
+          <p><a class="pull-right" href="admin/register_admin.php"> Register New User</a>
+            </p>
       </div>
       <div class="col-md-4 col-md-offset-4">
         <form class="form-horizontal" role="form" method="post" action="index.php">   

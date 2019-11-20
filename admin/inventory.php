@@ -19,63 +19,66 @@ $results = $db->fetchMultiple();
         function display_email_supplier(){ 
             $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)}) 
     }        
-    });
-    
-</script>
+    });  
+  </script>
 <div class="container">
    <!-- Display messages to the users. -->
-   <?php showmsg(); ?> 
-   <div class = "row" id="emailnotification"><!-- Place Your email notification here --></div>
-   <div class = "row-center"  style="color:white;">
-       <form action="ajax_search_product.php" method="post" id="searchDatabase">
-               <legend style="color:white">Search Inventory</legend> 
-               <fieldset style="color:white;font-size: 10px;"> Product Name: <input name="productname" style="color:black;font-size: 10px;" type="text" placeholder="Enter Product Name" size="150" required />
-               <input  name="Search" type="submit" value="Search" style="color:black;" /></fieldset> 
-       </form>
-    </div>
-   <!-- Search Form result from Ajax Here -->    
-   <div class="row" id="alert_success">
-   </div>
-   <div class="jumbotron">
-   <small class="pull-right"><a href="add_product.php"> Add Product </a></small>
-  <?php /*Collect Admin's - From $_SESSION['user_data'] */
-    $fullname = $_SESSION['user_data']['fullname']; 
-    echo '<small class="pull-left" style="color:#337ab7;">'.$fullname.' | Viewing / Editing </small>';
-   ?>
-    <h2 class="text-center" style="color:black;">Inventory</h2>
-     <table class="table table-bordered table-hover text-center">
-        <thead >
-          <tr>
-            <th class="text-center" style="color:black;"></th>
-            <th class="text-center" style="color:black;">Name</th>
-            <th class="text-center" style="color:black;">Description </th>
-            <!--<th class="text-center" style="color:black;">Supplier</th> -->
-           <!-- <th class="text-center" style="color:black;">Email</th> -->
-            <!--<th class="text-center" style="color:black;">Cost</th>-->
-            <th class="text-center" style="color:black;">Quantity</th>
-            <th class="text-center" style="color:black;">Image</th>
-          </tr>
-        </thead>
-        <tbody>
-    <?php  foreach ($results as $result) { ?>
-          <tr>
-            <td style="color:grey;"><?php echo $result['id'] ?></td>
-            <td style="color:#262626;"><?php echo $result['productName'] ?></td>
-            <td style="color:#262626;"><?php echo $result['productDescription'] ?></td>
-            <!-- <td style="color:#262626;"><?php echo $result['productSupplier'] ?></td>-->
-           <!-- <td style="color:#262626;"><?php echo $result['productEmail'] ?></td> -->
-            <!-- <td style="color:#262626;">$<?php echo $result['productCost'] ?></td> -->
-            <td style="color:#262626;"><?php echo $result['quantity'] ?></td>
-            <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px">'; ?></td>
-            <td><a href="https://<?php echo $result['link']; ?>" class='btn btn-primary'>Link</a></td>
-            <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View Report</a></td>
-            <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Update</a></td> 
-          </tr>
-          <?php } //end your loop ?>
-        </tbody>
-     </table>
-</div> <!-- end .jumbotron -->
+    <?php showmsg(); ?>  
+   <div class ="page-header" style="color: white;border-bottom:white;">
+    <p class="pull-left"> Search Inventory 
+    <a href="add_product.php" style="color:white;"><p class="pull-right"> Add Product </p></a></p>
+</div>
+<div class="jumbotron">
+         <div class = "row" >
+             <form class="form-inline" action="ajax_search_product.php" method="post" id="searchDatabase">
+                     <div class="form-group">
+                      <label for="productname" style="color: black;"> Product Name: </label>
+                      <input type="text" class="form-control" id="productname" name="productname">
+                    </div>
+                    <button type="submit" class="btn btn-default" style="color:black;">Search</button>
+             </form>
+         </div>
+         <!-- Place Your email notification here -->
+         <div class = "row" id="emailnotification"></div>
+         <!-- Search Form result from Ajax Here -->    
+         <div class="row" id="alert_success"></div>
+</div> 
+
+<div class="page-header" style="color: white;">
+      <h2 class="text-center"> Inventory </h2>
+</div>
+<div class="jumbotron">
+     <div class="table-responsive">
+         <table class="table table-bordered table-hover text-center">
+            <thead>
+              <tr>
+                <!--<th class="text-center" style="color:black;">ID</th> -->
+                <th class="text-center" style="color:black;">Name</th>
+                <th class="text-center" style="color:black;">Description </th>
+                <th class="text-center" style="color:black;">Quantity</th>
+                <th class="text-center" style="color:black;">Image</th>
+              </tr>
+            </thead>
+            <tbody>
+        <?php  foreach ($results as $result) { ?>
+              <tr>
+                <!-- <td style="color:grey;"><?php echo $result['id'] ?></td> -->
+                <td style="color:#262626;"><?php echo $result['productName'] ?></td>
+                <td style="color:#262626;"><?php echo $result['productDescription'] ?></td>
+                <td style="color:#262626;"><?php echo $result['quantity'] ?></td>
+                <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px" class="img-circle">'; ?></td>
+                <td><a href="https://<?php echo $result['link']; ?>" class='btn btn-primary'>Link</a></td>
+                <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View Report</a></td>
+                <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Update</a></td> 
+              </tr>
+              <?php } //end your loop ?>
+            </tbody>
+         </table>
+   </div> <!-- end. table-responsive -->
+ </div> <!-- end .jumbotron -->  
 </div> <!-- end .container -->
+
+
 <script>   
     $(document).ready(function(){ 
      /* Prevents the update form from refreshing when the submit id of the form is set. 
