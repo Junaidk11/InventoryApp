@@ -10,86 +10,51 @@
         $db->bindvalue(':email', $_SESSION['user_data']['email'],PDO::PARAM_STR);
         $row = $db->fetchSingle(); 
 ?>
-<!-- Email notification script here 
-<script>
+
+<div class ="page-header">
     
-    $(document).ready(function(){
-        
-        display_email_supplier();
-        
-        setInterval(function(){ display_email_supplier()}, 4000); 
-        function display_email_supplier(){ 
-            $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)})
-        
-    }        
-    });
-    
-    
-</script>
--->
-<div class="well">
-      <small class="pull-right" style="color:#337ab7;"><a href="inventory.php"> View Inventory </a></small>
-      <small class="pull-right" style="color:#337ab7;"><a href="users.php"> View Users |</a></small>
-      <small class="pull-left" style="color:#337ab7;"><?php echo $fullname;?> | Viewing </small>
-      <h2 class="text-center">Account Information</h2>
-</div> 
-<div class="container"> 
-  <div class = "row" id="emailnotification">
-           <!-- Place Your email notification here -->
-  </div>
-  <div class="rows">
-      <?php  showmsg(); ?>
-     <div class="col-md-9">
-          <?php if($row){  ?>
-           <form class="form-horizontal" role="form" method="post" action="my_admin.php">
-                <div class="form-group">
-                <label class="control-label col-sm-2" for="name" style="color:#f3f3f3;">Name</label>
-                <div class="col-sm-10">
-                  <input type="name" name="name" class="form-control" id="name" value="<?php echo $row['fullname']; ?>" required>
-                </div>
+      <div class ="pull-right" style="color: white;border-bottom:white;">
+          <a href="inventory.php"><h2 class="pull-right" style="color: white;"> Inventory</h2></a>
+      </div>
+      <h2 class="text-center" style="color: white;"> Account Information </h2>
+</div>
+<?php  showmsg(); ?>
+<div class="container">
+   <?php if($row){  ?>
+     <div class="rows">
+              <div class="text-center">
+                <a href="edit_admin.php?admin_id=<?php echo $row['id']; ?>">
+                     <?php   $image = $row['image'];  ?>
+                  <?php  echo '<img src="uploaded_image/'. $image .'"style="width:500px;height:500px" class="img-square">'; ?> 
+                </a>
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="email" style="color:#f3f3f3;">Email:</label>
-                <div class="col-sm-10">
-                  <input type="email" name="email" class="form-control" id="email" value="<?php  echo $row['email']; ?>" required>
-                </div>
-              </div>
-              <div class="form-group ">
-                <label class="control-label col-sm-2" for="pwd" style="color:#f3f3f3;">Password:</label>
-                <div class="col-sm-10">
-                 <fieldset disabled> 
-                  <input type="password" name="password" class="form-control disabled" id="pwd" value="$<?php echo $row['password']; ?>" required>
-                 </fieldset> 
-                </div>
-              </div>
-              <div class="form-group"> 
-                <div class="col-sm-offset-2 col-sm-10">
-                    <a class="btn btn-primary" href="edit_admin.php?admin_id=<?php echo $row['id'] ?>">Edit</a>
-                    <button type="submit" class="btn btn-danger pull-right" name="delete_admin">Delete</button>
-                </div>
-              </div>
-            </form>
-     </div>
-     <div class="col-md-3">
-           <div style="padding: 20px;">
-                <div class="thumbnail">
-                  <a href="edit_admin.php?admin_id=<?php echo $row['id']; ?>">
-                       <?php   $image = $row['image'];  ?>
-                    <?php  echo '<img src="uploaded_image/'. $image .'"style="width:150px;height:150px">'; ?> 
-                  </a>
-                  <h4 class="text-center"><?php echo $row['fullname']; ?></h4>
-                </div>
-           </div>
-     </div>
-       <?php } ?>
-  </div>  
+               <h4 class="text-center" style="color: white;"><?php echo $row['fullname']; ?></h4>
+    </div>
+    <div class="rows">
+         <div class="text-center">
+               <form class="form-inline" role="form" method="post" action="my_admin.php">
+                  <div class="form-group">
+                    <label class="control-label" for="name" style="color:#f3f3f3;">Name: </label>
+                      <input type="name" name="name" class="form-control" id="name" value="<?php echo $row['fullname']; ?>" required>
+                  </div><br><br>
+
+                  <div class="form-group">
+                    <label class="control-label" for="email" style="color:#f3f3f3;">Email:</label>
+                      <input type="email" name="email" class="form-control" id="email" value="<?php  echo $row['email']; ?>" required>
+                  </div><br><br>
+                  <button type="submit" class="btn btn-danger col-md-3 pull-left" name="delete_admin"> Delete Account </button>
+                  <a type="edit" name ="edit" class="btn btn-primary col-md-3 pull-right" href="edit_admin.php?admin_id=<?php echo $row['id'] ?>">Edit Account Information</a>
+                </form>
+         </div>
+           <?php } ?>
+      </div>  
 </div>
 
 <?php 
 /************** Deleting data from database when delete button is clicked ******************/  
 if(isset($_POST['delete_admin'])) {
     $admin_id = $_SESSION['user_data']['id']; 
-    $message = '<div class="alert alert-danger text-center">
+    $message = '<div class="alert alert-danger alert-dismissible fade in text-center">
   <strong>Please confirm!</strong><br>Do you want to delete your account?<br>
   <a href="#" class="btn btn-default" data-dismiss="alert" aria-label="close">No</a>
   <br>
@@ -106,17 +71,17 @@ if(isset($_POST['delete_admin'])) {
     $db->bindvalue(':id', $delete_id, PDO::PARAM_INT);
     $run_query = $db->execute();
     if($run_query){
-        /* Admin deleted successfully. */
-        $message = '<div class="alert alert-success text-center">
+        /* User deleted successfully. */
+        $message = '<div class="alert alert-success alert-dismissible fade in text-center" style="background-color:white;">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Admin deleted successfully!</strong> Please register a new admin!</div>'; 
+  <strong>User deleted successfully.</strong> Login required. </div>'; 
         keepmsg($message);
         redirect('logout.php'); 
     }else{
         /* Delete unsuccessful. */
-        $message = '<div class="alert alert-danger text-center">
-        <a href="my_admin.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Delete unsuccessful!</strong> User not deleted. </div>'; 
+        $message = '<div class="alert alert-danger alert-dismissible fade in text-center" style="background-color:white;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Delete unsuccessful.</strong> User not deleted. </div>'; 
     }
 }?>
 <?php include('includes/footer.php'); ?>
