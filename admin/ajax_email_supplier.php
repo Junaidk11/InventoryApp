@@ -21,21 +21,21 @@ foreach ($results as $result){
                     $supplier_name = $row['productSupplier']; 
                     $to                 =   $row['productEmail'];        
                     $email_subject = "Re: Placing new order for". $row['productName']."";
-                    $email_body = "\nDear $supplier_name, \n\nThis is a Test message for automated order.\n\n";
+                    $email_body = "\nDear $supplier_name, \n\nThis is a Test message for an automated order.\n\n";
                     $headers = "From: noreply@junaidjkhan.com"; 
                     if(mail($to,$email_subject,$email_body,$headers)){
                         $db->query('DELETE FROM new_order WHERE inventoryID=:id');
                         $db->bindvalue(':id',$row['id'], PDO::PARAM_INT);
                         $success = $db->execute();
                         if($success){
-                            echo "<div class='alert alert-success text-center'>
+                            echo "<div class='alert alert-success alert-dismissible fade in text-center'>
                                    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                <strong>Success!</strong> Your order for ". $row['productName']."has been successfully placed. </div>";
+                                <strong>Order for ". $row['productName']." has been successfully placed.</strong> </div>";
                         }
                     }else{
-                            echo "<div class='alert alert-danger text-center'>
+                            echo "<div class='alert alert-danger alert dismissible fade in text-center'>
                                     <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                    <strong>Sorry!</strong> Your Order for".$row['productName']." could not be Processed. Check report!</div>";
+                                    <strong>Order for".$row['productName']." could not be processed.</strong></div>";
                     }
                 return true;
 

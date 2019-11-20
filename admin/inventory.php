@@ -23,7 +23,9 @@ $results = $db->fetchMultiple();
   </script>
 <div class="container">
    <!-- Display messages to the users. -->
-    <?php showmsg(); ?>  
+    <?php showmsg(); ?> 
+    <!-- Place Your email notification here -->
+   <div class = "row" id="emailnotification"></div> 
    <div class ="page-header" style="color: white;border-bottom:white;">
     <p class="pull-left"> Search Inventory 
     <a href="add_product.php" style="color:white;"><p class="pull-right"> Add Product </p></a></p>
@@ -38,8 +40,7 @@ $results = $db->fetchMultiple();
                     <button type="submit" class="btn btn-default" style="color:black;">Search</button>
              </form>
          </div>
-         <!-- Place Your email notification here -->
-         <div class = "row" id="emailnotification"></div>
+         
          <!-- Search Form result from Ajax Here -->    
          <div class="row" id="alert_success"></div>
 </div> 
