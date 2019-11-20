@@ -66,7 +66,7 @@ $results = $db->fetchMultiple();
                 <td style="color:#262626;"><?php echo $result['productName'] ?></td>
                 <td style="color:#262626;"><?php echo $result['productDescription'] ?></td>
                 <td style="color:#262626;"><?php echo $result['quantity'] ?></td>
-                <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px" class="img-thumbnail img-responsive">'; ?></td>
+                <td><?php echo '<img src="uploaded_image/'. $result['image'] .'"style="width:100px;height:100px" class="img-circle">'; ?></td>
                 <td><a href="https://<?php echo $result['link']; ?>" class='btn btn-primary'>Link</a></td>
                 <td><a href="reports.php?report_id=<?php echo $result['id'] ?>" class='btn btn-primary'>View Report</a></td>
                 <td><a href="edit_product.php?product_id=<?php echo $result['id']; ?>" class='btn btn-danger'>Update</a></td> 
