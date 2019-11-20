@@ -52,7 +52,7 @@ $results = $db->fetchMultiple();
          <table class="table table-bordered table-hover text-center">
             <thead>
               <tr>
-                <th class="text-center" style="color:black;">ID</th>
+                <!--<th class="text-center" style="color:black;">ID</th> -->
                 <th class="text-center" style="color:black;">Name</th>
                 <th class="text-center" style="color:black;">Description </th>
                 <th class="text-center" style="color:black;">Quantity</th>
@@ -62,7 +62,7 @@ $results = $db->fetchMultiple();
             <tbody>
         <?php  foreach ($results as $result) { ?>
               <tr>
-                <td style="color:grey;"><?php echo $result['id'] ?></td>
+                <!-- <td style="color:grey;"><?php echo $result['id'] ?></td> -->
                 <td style="color:#262626;"><?php echo $result['productName'] ?></td>
                 <td style="color:#262626;"><?php echo $result['productDescription'] ?></td>
                 <td style="color:#262626;"><?php echo $result['quantity'] ?></td>
