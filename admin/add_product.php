@@ -90,7 +90,7 @@ if(isset($_POST['submit_product']))
             redirect('inventory.php');      
             $message= '<div class="alert alert-Failure text-center">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Oops!</strong> Product registeration unsuccessful. Please try again. </div>'; 
+  <strong>Sorry!</strong> Product registeration unsuccessful. Please try again. </div>'; 
             keepmsg($message); 
         }   
     }

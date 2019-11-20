@@ -19,10 +19,8 @@ $results = $db->fetchMultiple();
         function display_email_supplier(){ 
             $.get("ajax_email_supplier.php",function(show_email){$("#emailnotification").html(show_email)}) 
     }        
-    });  </script>
-<style>
-    
-</style>
+    });  
+  </script>
 <div class="container">
    <!-- Display messages to the users. -->
     <?php showmsg(); ?>  
@@ -43,8 +41,8 @@ $results = $db->fetchMultiple();
          <div class = "row" id="emailnotification"></div>
          <!-- Search Form result from Ajax Here -->    
          <div class="row" id="alert_success"></div>
-</div>  
-  
+</div> 
+
 <div class="page-header" style="color: white;">
       <h2 class="text-center"> Inventory </h2>
 </div>
@@ -107,5 +105,6 @@ $results = $db->fetchMultiple();
                  */
               $('#searchDatabase')[0].reset(); 
          });
-    });</script>
+    });
+</script>
 <?php include('includes/footer.php'); ?>
