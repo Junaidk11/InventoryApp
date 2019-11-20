@@ -54,6 +54,7 @@
 /************** Deleting data from database when delete button is clicked ******************/  
 if(isset($_POST['delete_admin'])) {
     $admin_id = $_SESSION['user_data']['id']; 
+    redirect('my_admin.php');
     $message = '<div class="alert alert-danger alert-dismissible fade in text-center">
   <strong>Please confirm!</strong><br>Do you want to delete your account?<br>
   <a href="#" class="btn btn-default" data-dismiss="alert" aria-label="close">No</a>
