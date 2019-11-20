@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand navbar-light" href="" style="color: #f3f3f3">Inventory<strong>MANAGER</strong></a>
+                <a class="navbar-brand navbar-light" href="inventory.php" style="color: #f3f3f3">Inventory<strong>MANAGER</strong></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
              <?php
