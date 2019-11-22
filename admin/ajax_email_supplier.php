@@ -1,6 +1,7 @@
 <?php 
 include('includes/header.php'); 
 require('includes/pdocon.php');
+include('includes/functions.php');
 $db = new Pdocon;
 $db->query("SELECT * FROM new_order");
 $results = $db->fetchMultiple();
