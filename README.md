@@ -6,4 +6,6 @@ Inventory Management Web-Application :
         2) Backened
              MySQL and PHP  
              
-The App was developed as an Intern for Fraser International College Physics Lab. 
+The App was developed as an Intern for Fraser International College Physics Lab.
+
+
